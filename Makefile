@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/04 13:28:45 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/04 14:02:46 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-INCLUDES = -I ./ -I ../libft/includes -L ../libft -lft
+INCLUDES = -I ./includes -I ./libft/includes -L ./libft -lft
 
 all: libft $(NAME)
 
