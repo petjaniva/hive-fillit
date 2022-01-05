@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/05 12:30:54 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/05 12:42:45 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_olution
 {
 	size_t			height;
 	char			**solution;
-}
+}				t_solution;
 
 # define I		(int[8]) {0,0, 0,1, 0,2, 0,3}
 # define I90	(int[8]) {0,0, 1,0, 2,0, 3,0}
