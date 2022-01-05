@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/04 14:34:47 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/05 07:27:44 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 typedef struct s_tetris
 {
 	char			c;
-	int				yx[4][4];
+	char			yx[4][4];
 	struct s_tetris	*next;
 }				t_etris;
+
+typedef struct s_olution
+{
+	size_t			height;
+	char			**solution;
+}
 
 #endif
