@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/05 15:08:09 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:20:48 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,32 @@ void	align(char tetrimino[4][4])
 		shift_rows(tetrimino);
 }
 
-int	*convert(char tetrimino[4][4], int coordinates[8])
+void	convert(char tetrimino[4][4], int coordinates[8])
 {
-	//work in progress
+	int	row;
+	int	col;
+	int	i;
+	
+	i = 0;
+	while (i < 8)
+	{
+		coordinates[i] = 0;
+		i++;
+	}  // we can use ft_bzero here ??
+	row = 0;
+	i = 0;
+	while (row < 4)
+	{
+		col = 0;
+		while (col < 4)
+		{
+			if (tetrimino[row][col] == '#')
+			{
+				coordinates[i++] = col;
+				coordinates[i++] = row;			
+			}
+			col++;
+		}
+		row++;
+	}
 }
