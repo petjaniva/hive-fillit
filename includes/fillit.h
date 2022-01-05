@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/05 07:27:44 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/05 12:30:54 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,25 @@ typedef struct s_olution
 	size_t			height;
 	char			**solution;
 }
+
+# define I		(int[8]) {0,0, 0,1, 0,2, 0,3}
+# define I90	(int[8]) {0,0, 1,0, 2,0, 3,0}
+# define O		(int[8]) {0,0, 1,0, 0,1, 1,1}
+# define L		(int[8]) {0,0, 0,1, 0,2, 1,2}
+# define L90	(int[8]) {0,0, 0,1, 1,0, 2,0}
+# define L180	(int[8]) {0,0, 1,0, 1,1, 1,2}
+# define L270	(int[8]) {0,1, 1,1, 2,0, 2,1}
+# define J		(int[8]) {0,2, 1,0, 1,1, 1,2}
+# define J90	(int[8]) {0,0, 0,1, 1,1, 2,1}
+# define J180	(int[8]) {0,0, 0,1, 0,2, 1,0}
+# define J270	(int[8]) {0,0, 1,0, 2,0, 2,1}
+# define T		(int[8]) {0,0, 1,0, 2,0, 1,1}
+# define T90	(int[8]) {0,1, 1,0, 1,1, 1,2}
+# define T180	(int[8]) {0,1, 1,0, 1,1, 2,1}
+# define T270	(int[8]) {0,0, 0,1, 0,2, 1,1}
+# define Z		(int[8]) {0,0, 1,0, 1,1, 2,1}
+# define Z90	(int[8]) {0,1, 0,2, 1,0, 1,1}
+# define S		(int[8]) {0,1, 1,0, 1,1, 2,0}
+# define S90	(int[8]) {0,0, 0,1, 1,1, 1,2}
 
 #endif
