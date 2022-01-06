@@ -6,12 +6,16 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 11:37:26 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 11:39:08 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
+
+#include <fcntl.h>
+#define TRUE 1
+#define FALSE 0
 
 typedef struct s_tetris
 {
