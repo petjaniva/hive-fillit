@@ -6,14 +6,14 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 07:53:58 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 07:54:56 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	main(int argc, char *argv[])
 {
-	t_etris	*tetri_first;
-	char	**solution;
+	t_etris		*tetri_first;
+	t_solution	*solution;
 	
 	if (!argc == 2)
 	{
