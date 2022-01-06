@@ -6,9 +6,12 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 10:38:20 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:28:50 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+#include "fillit.h"
 
 int	sqrt_up(unsigned int num)
 {

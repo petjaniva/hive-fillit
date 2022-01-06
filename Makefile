@@ -6,11 +6,11 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/04 14:02:46 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/06 13:51:26 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRCS =
+SRCS = srcs/*.c
 
 NAME = fillit
 
@@ -20,13 +20,11 @@ CFLAGS = -Wall -Werror -Wextra
 
 INCLUDES = -I ./includes -I ./libft/includes -L ./libft -lft
 
-all: libft $(NAME)
+all: $(NAME)
 
 $(NAME):
-		$(CC) $(FLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
-
-libft:
-		@make -C ../libft/ fclean && make -C ../libft/
+		@make -C ./libft/ fclean && make -C ./libft/
+		@$(CC) $(FLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
 
 clean:
 		@rm -f $(OBJS)
