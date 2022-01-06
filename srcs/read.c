@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 10:10:21 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 14:04:14 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,16 @@ t_etris	*from_file_to_list(int fd)
 			return (NULL);
 		}
 		if (!tetri_first)
+		{
 			tetri_first = tetri_new;
+			tetri_first->c = 'a';
+		}
 		else
+		{
+			tetri_new->c =tetri_old->c + 1;
 			tetri_old->next = tetri_new;
+		}
+			
 		tetri_old = tetri_new;
 	}
 	return (tetri_first);
