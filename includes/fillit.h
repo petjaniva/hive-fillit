@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 11:39:08 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 13:13:12 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,18 @@ typedef struct s_olution
 						{0,0, 0,1, 1,1, 2,0},\
 						{0,0, 0,1, 1,1, 1,2},\
 						{0,1, 1,0, 1,1, 2,0}}
+
+int		check_line(char *line);
+int		there_is_next_tetrimino(int fd, char **line);
+t_etris	*get_next_tetrimino(int fd, char **line);
+t_etris	*from_file_to_list(int fd);
+t_etris	*read_tetriminos(char *filename);
+int	sqrt_up(unsigned int num);
+int	is_first_row_empty(char tetrimino[4][4]);
+int	is_first_col_empty(char tetrimino[4][4]);
+void	shift_cols(char tetrimino[4][4]);
+void	shift_rows(char tetrimino[4][4]);
+void	align(char tetrimino[4][4]);
+void	convert(char tetrimino[4][4], int coordinates[8]);
 
 #endif
