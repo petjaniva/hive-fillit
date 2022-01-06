@@ -6,16 +6,12 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 10:04:37 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 10:10:21 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
-#include <stdio.h>
-#include <fcntl.h>
-#define TRUE 1
-#define FALSE 0
 
 int		check_line(char *line)
 {
