@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 13:40:25 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/06 13:55:15 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	print_tetriminos(t_etris *tetri_first)
 	tetrimino = tetri_first;
 	while (tetrimino)
 	{
+		align(tetrimino->yx);
 		while (j < 4)
 		{
 			while (i < 4)
