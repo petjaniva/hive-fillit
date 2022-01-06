@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/05 22:20:48 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:38:20 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,13 @@ void	convert(char tetrimino[4][4], int coordinates[8])
 		{
 			if (tetrimino[row][col] == '#')
 			{
-				coordinates[i++] = col;
-				coordinates[i++] = row;			
+				coordinates[i++] = row;
+				coordinates[i++] = col;	
 			}
 			col++;
 		}
 		row++;
 	}
 }
+
+
