@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 13:13:12 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/07 09:21:00 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FILLIT_H
 
 #include <fcntl.h>
+#include <string.h>
 #define TRUE 1
 #define FALSE 0
 
@@ -83,5 +84,7 @@ void	shift_cols(char tetrimino[4][4]);
 void	shift_rows(char tetrimino[4][4]);
 void	align(char tetrimino[4][4]);
 void	convert(char tetrimino[4][4], int coordinates[8]);
+int	check_shape(int coordinates[8]);
+int	validate_tetriminos(t_etris *tetri_first);
 
 #endif
