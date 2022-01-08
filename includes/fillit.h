@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/07 09:21:00 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/08 09:02:36 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_tetris
 	char			c;
 	char			yx[4][4];
 	int				coordinates[8];
+	int				x_offset;
+	int				y_offset;
 	struct s_tetris	*next;
 }				t_etris;
 
