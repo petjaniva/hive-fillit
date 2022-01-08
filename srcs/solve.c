@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/08 14:07:13 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/08 14:30:09 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,22 @@ t_solution	*initiate_solution(t_etris tetri_first)
 
 int			find_solution(t_solution *solution, t_etris *tetrimino)
 {
-	if (!tetrimino)
+	if (place_tetrimino(solution, tetrimino))
 		return (TRUE);
-	while (!place_tetrimino(solution, tetrimino))
-		if (!move_tetrimino(solution, tetrimino))
-			return (FALSE);
-	if (find_solution(solution, tetrimino->next))
-		return (TRUE);
-	return (FALSE);
+	else
+		return (FALSE);
 }
 
 int			place_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
 	//tries to place the tetrimino according to the stored offsets.
 	//return true is placing succeeds, false if not
+	if (!tetrimino)
+		return (TRUE);
+	while (!try_placing(solution, tetrimino))
+		if (!move_tetrimino(tetrimino))
+			return (FALSE);
+	return (place_tetrimino(solution, tetrimino->next));
 }
 
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
