@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/08 14:30:09 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/09 11:43:13 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,27 @@ t_solution	*initiate_solution(t_etris tetri_first)
 
 int			find_solution(t_solution *solution, t_etris *tetrimino)
 {
-	if (place_tetrimino(solution, tetrimino))
+	if (!tetrimino)
 		return (TRUE);
-	else
-		return (FALSE);
+	while (move_tetrimino(solution, tetrimino))
+		if (place_tetrimino(solution, tetrimino))
+			if (find_solution(tetrimino->next))
+				return (TRUE);
+	return (FALSE);
 }
 
 int			place_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
 	//tries to place the tetrimino according to the stored offsets.
+	//checks for overlaps with other pieces
 	//return true is placing succeeds, false if not
-	if (!tetrimino)
-		return (TRUE);
-	while (!try_placing(solution, tetrimino))
-		if (!move_tetrimino(tetrimino))
-			return (FALSE);
-	return (place_tetrimino(solution, tetrimino->next));
+
 }
 
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
-	//increments tetrimino offsets to find a place for it
+	//increments tetrimino offsets to find a place for it.
+	//On first call initialises offsets to 0
 	//if there is a place where it doesn't go outside of borders returns true
 	//if the board is too small for it, returns false
 }
