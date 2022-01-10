@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 14:07:29 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:19:18 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,13 @@ void	align(char tetrimino[4][4])
 		shift_rows(tetrimino);
 }
 
-void	convert(char tetrimino[4][4], int coordinates[8])
+void	convert(t_etris *tetrimino)
 {
 	int	row;
 	int	col;
 	int	i;
 	
-	i = 0;
-	while (i < 8)
-	{
-		coordinates[i] = 0;
-		i++;
-	}  // we can use ft_bzero here ??
+	ft_bzero(tetrimino->coordinates, 8);
 	row = 0;
 	i = 0;
 	while (row < 4)
@@ -116,16 +111,17 @@ void	convert(char tetrimino[4][4], int coordinates[8])
 		col = 0;
 		while (col < 4)
 		{
-			if (tetrimino[row][col] == '#')
+			if (tetrimino->yx[row][col] == '#')
 			{
-				coordinates[i++] = row;
-				coordinates[i++] = col;	
+				tetrimino->coordinates[i++] = row;
+				tetrimino->coordinates[i++] = col;	
 			}
 			col++;
 		}
 		row++;
 	}
 }
+
 
 void	find_size(t_etris *tetrimino)
 {

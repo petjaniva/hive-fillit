@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 13:54:09 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:19:07 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ int	is_first_col_empty(char tetrimino[4][4]);
 void	shift_cols(char tetrimino[4][4]);
 void	shift_rows(char tetrimino[4][4]);
 void	align(char tetrimino[4][4]);
-void	convert(char tetrimino[4][4], int coordinates[8]);
+void	convert(t_etris *tetrimino);
 int	check_shape(int coordinates[8]);
 int	validate_tetriminos(t_etris *tetri_first);
+void	find_size(t_etris *tetrimino);
+
 
 #endif

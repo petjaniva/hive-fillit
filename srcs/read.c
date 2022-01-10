@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 10:36:48 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 14:18:24 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ t_etris	*create_tetrimino(char yx[4][4])
 	if (!tetrimino)
 		return (NULL);
 	ft_memcpy(tetrimino->yx, yx, sizeof(yx));
+	convert(tetrimino);
 	tetrimino->x_offset = NULL;
 	tetrimino->y_offset = NULL;
+	find_size(tetrimino);
+	tetrimino->next = NULL;
 	return (tetrimino);
 }
 
