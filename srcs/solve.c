@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 11:13:42 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:07:46 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	solution = malloc(sizeof(*solution));
 	pieces_count = count_pieces(tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
-	solution->solution = strnewarrarr(min_board_size, min_board_size);
+	solution->solution = strnewarray(min_board_size, min_board_size);
 	return (solution);
 }
 
