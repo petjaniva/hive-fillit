@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/07 14:30:16 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 10:42:39 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,26 @@ int			find_solution(t_solution *solution, t_etris *tetrimino)
 		return (TRUE);
 	return (FALSE);
 	
+}
+
+int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
+{	
+	if (tetrimino->x_offset == solution->height && tetrimino->y_offset == solution->height)
+		return (FALSE);
+	else if (tetrimino->x_offset < solution->height)
+	{
+		tetrimino->x_offset++;
+		return (TRUE);
+	}
+	else
+	{
+		tetrimino->x_offset = 0;
+		tetrimino->y_offset++;
+	}
+	//increments tetrimino offsets to find a place for it.
+	//On first call initialises offsets to 0
+	//if there is a place where it doesn't go outside of borders returns true
+	//if the board is too small for it, returns false
 }
 
 void		grow_solution(t_solution *solution)
