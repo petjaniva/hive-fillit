@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 15:08:06 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 17:18:09 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	int			min_board_size;
 
 	solution = malloc(sizeof(*solution));
-	pieces_count = count_pieces(tetri_first);
+	pieces_count = count_pieces(&tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
 	solution->solution = strnewarray(min_board_size, min_board_size);
 	return (solution);
@@ -93,7 +93,7 @@ int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
 
 int			check_overlap(t_solution *solution, int y, int x)
 {
-	if (solution[y][x] != '.')
+	if (solution->solution[y][x] != '.')
 		return (TRUE);
 	else
 		return (FALSE);
