@@ -64,9 +64,9 @@ int			place_tetrimino(t_solution *solution, t_etris *tetrimino)
 
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 {	
-	if (tetrimino->x_offset == solution->height && tetrimino->y_offset == solution->height)
+	if (tetrimino->x_offset == solution->height - 1 && tetrimino->y_offset == solution->height - 1)
 		return (FALSE);
-	else if (tetrimino->x_offset < solution->height)
+	else if (tetrimino->x_offset < solution->height - 1)
 	{
 		tetrimino->x_offset++;
 		return (TRUE);
