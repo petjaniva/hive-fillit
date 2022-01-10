@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 13:28:50 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 10:43:22 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,17 @@ void	convert(char tetrimino[4][4], int coordinates[8])
 	}
 }
 
+char	**strnewarrarr(int pointers, int chars)
+{
+	char	**arrarr;
+	int		i;
 
+	i = 0;
+	arrarr = malloc(sizeof(*arrarr) * pointers);
+	while (i < pointers)
+	{
+		arrarr[i] = ft_strnew(chars);
+		++i;
+	}
+	return (arrarr);
+}
