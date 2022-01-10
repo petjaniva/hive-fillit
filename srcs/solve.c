@@ -6,11 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/10 10:42:39 by bkandemi         ###   ########.fr       */
-=======
-/*   Updated: 2022/01/09 11:43:13 by pniva            ###   ########.fr       */
->>>>>>> f7c881c54eaee6a4ec0749e546ceb42fed40520f
+/*   Updated: 2022/01/10 11:13:42 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +71,7 @@ int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 	{
 		tetrimino->x_offset = 0;
 		tetrimino->y_offset++;
+		return (TRUE);
 	}
 
 	//increments tetrimino offsets to find a place for it.
