@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 11:13:42 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:46:15 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,81 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	return (solution);
 }
 
+int			count_pieces(t_etris *tetri_first)
+{
+	int pieces_count;
+	t_etris	*tetrimino;
+	
+	pieces_count = 0;
+	tetrimino = tetri_first;
+	while (tetrimino)
+	{
+		pieces_count++;
+		tetrimino = tetrimino->next;
+	}
+	return (pieces_count);
+}
+
 int			find_solution(t_solution *solution, t_etris *tetrimino)
 {
 	if (!tetrimino)
 		return (TRUE);
 	while (move_tetrimino(solution, tetrimino))
-		if (place_tetrimino(solution, tetrimino))
+		if (is_place_tetrimino(solution, tetrimino))
 			if (find_solution(tetrimino->next))
 				return (TRUE);
 	return (FALSE);
 }
 
-int			place_tetrimino(t_solution *solution, t_etris *tetrimino)
+int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
-	//tries to place the tetrimino according to the stored offsets.
-	//checks for overlaps with other pieces
-	//return true is placing succeeds, false if not
-
+	if (is_there_overlap(solution, tetrimino))
+	{
+		return (FALSE);
+	}
+	else
+	{
+		place_tetrimino(solution, tetrimino);
+		return (TRUE);
+	}
 }
 
+int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		if (check_overlap(solution, tetrimino->y_offset + i++, tetrimino->x_offset + i++))
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+int			check_overlap(t_solution *solution, int y, int x)
+{
+	if (solution[y][x] != '.')
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+
+void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
+{
+	int	i;
+	int	y;
+	int	x;
+
+	i = 0;
+	while (i < 8)
+	{
+		y = tetrimino->y_offset + i++;
+		x = tetrimino->x_offset + i++;
+		solution->solution[y][x] = tetrimino->c;
+	}
+}
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 {	
 	if (tetrimino->x_offset == solution->height - 1 && tetrimino->y_offset == solution->height - 1)
@@ -95,4 +151,5 @@ void		grow_solution(t_solution *solution)
 		ft_memset(solution->solution[i], '.', new_height);
 		++i;
 	}
+	solution->height = new_height;
 }
