@@ -6,11 +6,14 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/06 13:51:26 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/10 07:50:35 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRCS = srcs/*.c
+SRCS = srcs/main.c \
+		srcs/helper_functions.c \
+		srcs/read.c \
+		srcs/validate.c
 
 NAME = fillit
 
