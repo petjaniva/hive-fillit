@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/06 14:04:14 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 10:36:48 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ int		there_is_next_tetrimino(int fd, char **line)
 		return (FALSE);
 }
 
+t_etris	*create_tetrimino(char yx[4][4])
+{
+	t_etris	*tetrimino;
+
+	tetrimino = malloc(sizeof(*tetrimino));
+	if (!tetrimino)
+		return (NULL);
+	ft_memcpy(tetrimino->yx, yx, sizeof(yx));
+	tetrimino->x_offset = NULL;
+	tetrimino->y_offset = NULL;
+	return (tetrimino);
+}
+
 t_etris	*get_next_tetrimino(int fd, char **line)
 {
 	t_etris	*tetrimino;
@@ -65,8 +78,7 @@ t_etris	*get_next_tetrimino(int fd, char **line)
 			return (NULL);
 		++i;
 	}
-	tetrimino = malloc(sizeof(t_etris));
-	ft_memcpy(tetrimino->yx, yx, sizeof(yx));
+	tetrimino = create_tetrimino(yx);
 	return (tetrimino);
 }
 
