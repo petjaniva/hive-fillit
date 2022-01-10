@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/01/10 10:42:39 by bkandemi         ###   ########.fr       */
+=======
 /*   Updated: 2022/01/09 11:43:13 by pniva            ###   ########.fr       */
+>>>>>>> f7c881c54eaee6a4ec0749e546ceb42fed40520f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +63,20 @@ int			place_tetrimino(t_solution *solution, t_etris *tetrimino)
 }
 
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
-{
+{	
+	if (tetrimino->x_offset == solution->height - 1 && tetrimino->y_offset == solution->height - 1)
+		return (FALSE);
+	else if (tetrimino->x_offset < solution->height - 1)
+	{
+		tetrimino->x_offset++;
+		return (TRUE);
+	}
+	else
+	{
+		tetrimino->x_offset = 0;
+		tetrimino->y_offset++;
+	}
+
 	//increments tetrimino offsets to find a place for it.
 	//On first call initialises offsets to 0
 	//if there is a place where it doesn't go outside of borders returns true
