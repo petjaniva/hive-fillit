@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 13:46:15 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 15:08:06 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	solution = malloc(sizeof(*solution));
 	pieces_count = count_pieces(tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
-	solution->solution = strnewarrarr(min_board_size, min_board_size);
+	solution->solution = strnewarray(min_board_size, min_board_size);
 	return (solution);
 }
 
@@ -43,7 +43,7 @@ int			count_pieces(t_etris *tetri_first)
 {
 	int pieces_count;
 	t_etris	*tetrimino;
-	
+
 	pieces_count = 0;
 	tetrimino = tetri_first;
 	while (tetrimino)
@@ -115,10 +115,15 @@ void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
 	}
 }
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
-{	
-	if (tetrimino->x_offset == solution->height - 1 && tetrimino->y_offset == solution->height - 1)
+{
+	int	max_width;
+	int max_height;
+
+	max_width = tetrimino->x_offset + tetrimino->width;
+	max_height = tetrimino->y_offset + tetrimino->height;
+	if (max_width == solution->height && max_height == solution->height)
 		return (FALSE);
-	else if (tetrimino->x_offset < solution->height - 1)
+	else if (max_width < solution->height)
 	{
 		tetrimino->x_offset++;
 		return (TRUE);

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 10:43:22 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/10 14:19:18 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,13 @@ void	align(char tetrimino[4][4])
 		shift_rows(tetrimino);
 }
 
-void	convert(char tetrimino[4][4], int coordinates[8])
+void	convert(t_etris *tetrimino)
 {
 	int	row;
 	int	col;
 	int	i;
 	
-	i = 0;
-	while (i < 8)
-	{
-		coordinates[i] = 0;
-		i++;
-	}  // we can use ft_bzero here ??
+	ft_bzero(tetrimino->coordinates, 8);
 	row = 0;
 	i = 0;
 	while (row < 4)
@@ -116,10 +111,10 @@ void	convert(char tetrimino[4][4], int coordinates[8])
 		col = 0;
 		while (col < 4)
 		{
-			if (tetrimino[row][col] == '#')
+			if (tetrimino->yx[row][col] == '#')
 			{
-				coordinates[i++] = row;
-				coordinates[i++] = col;	
+				tetrimino->coordinates[i++] = row;
+				tetrimino->coordinates[i++] = col;	
 			}
 			col++;
 		}
@@ -127,17 +122,35 @@ void	convert(char tetrimino[4][4], int coordinates[8])
 	}
 }
 
-char	**strnewarrarr(int pointers, int chars)
+
+void	find_size(t_etris *tetrimino)
 {
-	char	**arrarr;
+	int	i;
+
+	tetrimino->height = tetrimino->coordinates[0];
+	tetrimino->width = tetrimino->coordinates[1];
+	i = 2;
+	while (i < 8)
+	{
+		if (tetrimino->coordinates[i] > tetrimino->height)
+			tetrimino->height = tetrimino->coordinates[i];
+		if (tetrimino->coordinates[i + 1] > tetrimino->width)
+			tetrimino->width = tetrimino->coordinates[i + 1];
+		i = i + 2;
+	}
+}
+
+char	**strnewarray(int pointers, int chars)
+{
+	char	**array;
 	int		i;
 
 	i = 0;
-	arrarr = malloc(sizeof(*arrarr) * pointers);
+	array = malloc(sizeof(*array) * pointers);
 	while (i < pointers)
 	{
-		arrarr[i] = ft_strnew(chars);
+		array[i] = ft_strnew(chars);
 		++i;
 	}
-	return (arrarr);
+	return (array);
 }
