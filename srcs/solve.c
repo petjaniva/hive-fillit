@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 13:06:16 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 13:51:28 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,28 @@ int			find_solution(t_solution *solution, t_etris *tetrimino)
 		if (is_place_for_tetrimino(solution, tetrimino))
 			if (find_solution(solution, tetrimino->next))
 				return (TRUE);
+	remove_placement(solution, tetrimino);
 	return (FALSE);
+}
+
+void		remove_placement(t_solution *solution, t_etris *tetrimino)
+{
+	char	to_remove;
+	char	*ptr;
+	size_t	i;
+	
+	to_remove = tetrimino->c - 1;
+	i = 0;
+	while (i < solution->height)
+	{
+		ptr = ft_strrchr(solution->solution[i], to_remove);
+		while (ptr)
+		{
+			*ptr = '.';
+			ptr = ft_strrchr(solution->solution[i], to_remove);
+		}
+		++i;
+	}
 }
 
 int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
