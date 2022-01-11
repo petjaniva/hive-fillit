@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/07 09:20:08 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 07:33:34 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ void	print_tetriminos(t_etris *tetri_first)
 		j = 0;
 		ft_putchar('\n');
 		tetrimino = tetrimino->next;
+	}
+}
+
+void	print_solution(t_solution *solution)
+{
+	int	i;
+
+	i = 0;
+	while (i < solution->height)
+	{
+		ft_putendl(solution->solution[i]);
+		++i;
 	}
 }
 
