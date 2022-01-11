@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 12:18:09 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 14:32:55 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ t_etris	*from_file_to_list(int fd)
 		if (!tetri_first)
 		{
 			tetri_first = tetri_new;
-			tetri_first->c = 'a';
+			tetri_first->c = 'A';
 		}
 		else
 		{
-			tetri_new->c =tetri_old->c + 1;
+			tetri_new->c = tetri_old->c + 1;
 			tetri_old->next = tetri_new;
 		}
 			
