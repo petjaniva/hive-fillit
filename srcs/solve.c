@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 17:18:09 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:20:00 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			find_solution(t_solution *solution, t_etris *tetrimino)
 		return (TRUE);
 	while (move_tetrimino(solution, tetrimino))
 		if (is_place_tetrimino(solution, tetrimino))
-			if (find_solution(tetrimino->next))
+			if (find_solution(solution, tetrimino->next))
 				return (TRUE);
 	return (FALSE);
 }
