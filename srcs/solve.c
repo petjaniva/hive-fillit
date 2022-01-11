@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 17:20:00 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/11 09:26:42 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		if (check_overlap(solution, tetrimino->y_offset + i++, tetrimino->x_offset + i++))
+		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i++], tetrimino->x_offset + tetrimino->coordinates[i++])
 			return (TRUE);
 	}
 	return (FALSE);
@@ -109,8 +109,8 @@ void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		y = tetrimino->y_offset + i++;
-		x = tetrimino->x_offset + i++;
+		y = tetrimino->y_offset + tetrimino->coordinates[i++];
+		x = tetrimino->x_offset + tetrimino->coordinates[i++];
 		solution->solution[y][x] = tetrimino->c;
 	}
 }
