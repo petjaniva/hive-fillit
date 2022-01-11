@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 07:44:22 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 10:33:11 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	print_tetriminos(t_etris *tetri_first)
 		}
 		j = 0;
 		ft_putchar('\n');
+		for(int i = 0; i < 8; i++)
+		{
+			ft_putnbr(tetrimino->coordinates[i]);
+			ft_putchar(',');
+		}
+		ft_putchar('\n');
 		tetrimino = tetrimino->next;
 	}
 	ft_putchar('\n');
@@ -47,7 +53,7 @@ void	print_tetriminos(t_etris *tetri_first)
 
 void	print_solution(t_solution *solution)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < solution->height)
@@ -62,7 +68,7 @@ int	main(int argc, char *argv[])
 	t_etris		*tetri_first;
 	t_solution	*solution;
 	
-	if (!argc == 2)
+	if (argc != 2)
 	{
 		ft_putstr("Please give filename");
 	}
@@ -71,8 +77,10 @@ int	main(int argc, char *argv[])
 	if (!validate_tetriminos(tetri_first))
 	{
 			ft_putstr("error");
+			//ft_putendl("???");
 			return (0);
 	}
+	//ft_putendl("???");
 	solution = solve(tetri_first);
 	if (!solution)
 	{

@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/07 09:17:56 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 08:41:19 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	validate_tetriminos(t_etris *tetri_first)
 	tetrimino = tetri_first;
 	while (tetrimino)
 	{
-		convert(tetrimino->yx, tetrimino->coordinates);
 		if (!check_shape(tetrimino->coordinates))
 			return (FALSE);
 		tetrimino = tetrimino->next;
