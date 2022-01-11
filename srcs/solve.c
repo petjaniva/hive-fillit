@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 11:13:32 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 11:35:39 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,11 @@ int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 	size_t	max_width;
 	size_t	max_height;
 
+	if (tetrimino->x_offset == -1)
+	{
+		tetrimino->x_offset = 0;
+		return (TRUE);
+	}
 	max_width = tetrimino->x_offset + tetrimino->width;
 	max_height = tetrimino->y_offset + tetrimino->height;
 	if (max_width == solution->height && max_height == solution->height)
