@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 08:49:41 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 09:38:00 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_etris	*create_tetrimino(char yx[4][4])
 		return (NULL);
 	ft_memcpy(tetrimino->yx, yx, sizeof(int) * 16);
 	convert(tetrimino);
-	tetrimino->x_offset = NULL;
-	tetrimino->y_offset = NULL;
+	tetrimino->x_offset = 0;
+	tetrimino->y_offset = 0;
 	find_size(tetrimino);
 	tetrimino->next = NULL;
 	return (tetrimino);
