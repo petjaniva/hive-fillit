@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 08:43:44 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 08:51:08 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_solution	*solve(t_etris *tetri_first)
 	t_solution	*solution;
 	t_etris		*tetrimino;
 
-	solution = intiate_solution(tetri_first);
+	solution = initiate_solution(*tetri_first);
 	while (!find_solution(solution, tetri_first))
 	{
 		grow_solution(solution);
