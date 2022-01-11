@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 07:18:31 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 08:43:44 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int			find_solution(t_solution *solution, t_etris *tetrimino)
 	if (!tetrimino)
 		return (TRUE);
 	while (move_tetrimino(solution, tetrimino))
-		if (is_place_tetrimino(solution, tetrimino))
-			if (find_solution(tetrimino->next))
+		if (is_place_for_tetrimino(solution, tetrimino))
+			if (find_solution(solution, tetrimino->next))
 				return (TRUE);
 	return (FALSE);
 }
@@ -85,7 +85,7 @@ int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i++], tetrimino->x_offset + tetrimino->coordinates[i++])
+		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i++], tetrimino->x_offset + tetrimino->coordinates[i++]))
 			return (TRUE);
 	}
 	return (FALSE);
@@ -148,7 +148,7 @@ void		grow_solution(t_solution *solution)
 
 	new_height = solution->height + 1;
 	i = 0;
-	ft_free_ptr_array(solution->solution, solution->height);
+	ft_free_ptr_array((void **)solution->solution, solution->height);
 	solution->solution = malloc(sizeof(*(solution->solution)) * new_height);
 	while (i < new_height)
 	{

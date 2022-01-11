@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 08:03:19 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 08:41:56 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ int			move_tetrimino(t_solution *solution, t_etris *tetrimino);
 void		grow_solution(t_solution *solution);
 void	print_solution(t_solution *solution);
 void	print_tetriminos(t_etris *tetri_first);
+t_solution	*initiate_solution(t_etris tetri_first);
 
 #endif
