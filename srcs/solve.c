@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 08:51:08 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 09:45:24 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i++], tetrimino->x_offset + tetrimino->coordinates[i++]))
+		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i], tetrimino->x_offset + tetrimino->coordinates[i + 1]))
 			return (TRUE);
+		i = i + 2;
 	}
 	return (FALSE);
 }
