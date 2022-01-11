@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/10 14:19:07 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/11 08:03:19 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		there_is_next_tetrimino(int fd, char **line);
 t_etris	*get_next_tetrimino(int fd, char **line);
 t_etris	*from_file_to_list(int fd);
 t_etris	*read_tetriminos(char *filename);
+t_etris	*create_tetrimino(char yx[4][4]);
 int	sqrt_up(unsigned int num);
 int	is_first_row_empty(char tetrimino[4][4]);
 int	is_first_col_empty(char tetrimino[4][4]);
@@ -90,7 +91,19 @@ void	align(char tetrimino[4][4]);
 void	convert(t_etris *tetrimino);
 int	check_shape(int coordinates[8]);
 int	validate_tetriminos(t_etris *tetri_first);
+char	**strnewarray(int pointers, int chars);
 void	find_size(t_etris *tetrimino);
-
+t_solution	*solve(t_etris *tetri_first);
+t_solution	*initiate_solution(t_etris tetri_first);
+int			count_pieces(t_etris *tetri_first);
+int			find_solution(t_solution *solution, t_etris *tetrimino);
+int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino);
+int			is_there_overlap(t_solution *solution, t_etris *tetrimino);
+int			check_overlap(t_solution *solution, int y, int x);
+void		place_tetrimino(t_solution *solution, t_etris *tetrimino);
+int			move_tetrimino(t_solution *solution, t_etris *tetrimino);
+void		grow_solution(t_solution *solution);
+void	print_solution(t_solution *solution);
+void	print_tetriminos(t_etris *tetri_first);
 
 #endif
