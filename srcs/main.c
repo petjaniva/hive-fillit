@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 10:19:49 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:33:11 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_tetriminos(t_etris *tetri_first)
 
 void	print_solution(t_solution *solution)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < solution->height)

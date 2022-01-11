@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 09:45:24 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:13:32 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 t_solution	*solve(t_etris *tetri_first)
 {
 	t_solution	*solution;
-	t_etris		*tetrimino;
 
 	solution = initiate_solution(*tetri_first);
 	while (!find_solution(solution, tetri_first))
@@ -31,12 +30,36 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	int			pieces_count;
 	t_solution	*solution;
 	int			min_board_size;
+	int			i;
 
+	i = 0;
 	solution = malloc(sizeof(*solution));
 	pieces_count = count_pieces(&tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
+	solution->height = min_board_size;
 	solution->solution = strnewarray(min_board_size, min_board_size);
+	while (i < min_board_size)
+	{
+		ft_memset(solution->solution[i], '.', min_board_size);
+		++i;
+	}
+	if (!check_if_tetrimino_fit(min_board_size, &tetri_first))
+		grow_solution(solution);
 	return (solution);
+}
+
+int		check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first)
+{
+	t_etris	*tetrimino;
+
+	tetrimino = tetri_first;
+	while (tetrimino)
+	{
+		if (tetrimino->height >= min_board_size || tetrimino->width >= min_board_size)
+			return (FALSE);
+		tetrimino = tetrimino->next;
+	}
+	return (TRUE);
 }
 
 int			count_pieces(t_etris *tetri_first)
@@ -117,8 +140,8 @@ void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
 }
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
-	int	max_width;
-	int max_height;
+	size_t	max_width;
+	size_t	max_height;
 
 	max_width = tetrimino->x_offset + tetrimino->width;
 	max_height = tetrimino->y_offset + tetrimino->height;

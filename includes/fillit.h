@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 08:41:56 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/11 11:12:40 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void		grow_solution(t_solution *solution);
 void	print_solution(t_solution *solution);
 void	print_tetriminos(t_etris *tetri_first);
 t_solution	*initiate_solution(t_etris tetri_first);
+int		check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first);
 
 #endif
