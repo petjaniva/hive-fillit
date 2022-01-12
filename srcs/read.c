@@ -6,52 +6,33 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:58 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 14:57:27 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-t_etris	*read_minos(char *filename)
+t_etris	*from_file_to_list(char *filename)
 {
 	int		fd;	
 	t_etris	*tetri_first;
 
-	fd = open(filename, O_RDONLY);
-	tetri_first = from_file_to_list(fd);
-	return (tetri_first);
-}
-//TODO Too long, split or change?
-t_etris	*from_file_to_list(int fd)
-{
-	char	*line;
-	t_etris	*tetri_first;
-	t_etris	*tetri_old;
-	t_etris	*tetri_new;
-
 	tetri_first = NULL;
-	while (there_is_next_mino(fd, &line))
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 	{
-		tetri_new = get_next_mino(fd, &line);
-		if (!tetri_new)
-			return (NULL);
-		if (!tetri_first)
-		{
-			tetri_first = tetri_new;
-			tetri_first->c = 'A';
-		}
-		else
-		{
-			if (tetri_old->c == 'Z')
-				return (NULL);
-			tetri_new->c = tetri_old->c + 1;
-			tetri_old->next = tetri_new;
-		}	
-		tetri_old = tetri_new;
+		ft_putendl("unable to read file");
+		return (NULL);
 	}
-	return (tetri_first);
+	if (read_mino(fd, &tetri_first) == TRUE)
+		return (tetri_first);
+	return (NULL);
 }
+
+
+//TODO Too long, split or change?
+
 
 /*
 ** Reads the next line from the file. If line exists and if strlen is = 0, checks if next line
@@ -59,7 +40,7 @@ t_etris	*from_file_to_list(int fd)
 ** is of a valid mino.
 */
 // TODO error check for no new line between minos
-int	there_is_next_mino(int fd, char **line)
+/*int	there_is_next_mino(int fd, char **line)
 {
 	if (ft_get_next_line(fd, line))
 	{
@@ -73,7 +54,7 @@ int	there_is_next_mino(int fd, char **line)
 			return (TRUE);
 	}
 	return (FALSE);
-}
+}*/
 
 int	check_line(char *line)
 {
@@ -91,7 +72,7 @@ int	check_line(char *line)
 	return (TRUE);
 }
 
-t_etris	*get_next_mino(int fd, char **line)
+/*t_etris	*get_next_mino(int fd, char **line)
 {
 	t_etris	*mino;
 	char	yx[4][4];
@@ -107,7 +88,7 @@ t_etris	*get_next_mino(int fd, char **line)
 	}
 	mino = create_mino(yx);
 	return (mino);
-}
+}*/
 
 //TODO: rename align and convert?
 t_etris	*create_mino(char yx[4][4])
@@ -127,3 +108,57 @@ t_etris	*create_mino(char yx[4][4])
 	mino->next = NULL;
 	return (mino);
 }
+
+int	read_mino(int fd, t_etris **head) 
+{
+	char *line;
+	char	yx[4][4];
+	int	i;
+	int mino_in_list;
+
+	i = 1;
+	while (ft_get_next_line(fd, &line) > 0)
+	{
+		if (i % 5 == 0) //
+		{
+			if (ft_strlen(line) != 0)
+				return (FALSE);
+			add_mino_to_list(head, create_mino(yx));
+			mino_in_list = TRUE;
+			
+		}
+		else
+		{
+			if (check_line(line) == FALSE)
+				return (FALSE);
+			ft_strcpy(yx[i % 5 - 1], line);
+			mino_in_list = FALSE;
+		}
+		i++;
+	}
+	if (i % 5 != 0)
+		return (FALSE);
+	if (mino_in_list == FALSE){
+		add_mino_to_list(head, create_mino(yx));
+	}
+	return (TRUE);
+}
+
+void	add_mino_to_list(t_etris **head, t_etris *new)
+{
+	t_etris	*tmp;
+	if (*head == NULL)
+	{
+		*head = new;
+		(*head)->c = 'A';
+	}
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->c = tmp->c + 1;
+	}
+}
+

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:14 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 12:12:55 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ typedef struct s_olution
 int		check_line(char *line);
 int		there_is_next_mino(int fd, char **line);
 t_etris	*get_next_mino(int fd, char **line);
-t_etris	*from_file_to_list(int fd);
-t_etris	*read_minos(char *filename);
+t_etris	*from_file_to_list(char *filename);
 t_etris	*create_mino(char yx[4][4]);
 int	sqrt_up(unsigned int num);
 int	is_first_row_empty(char mino[4][4]);
@@ -109,5 +108,7 @@ void	print_minos(t_etris *tetri_first);
 t_solution	*initiate_map(t_etris tetri_first);
 int		check_if_mino_fit(int min_board_size, t_etris *tetri_first);
 void		remove_placement(t_solution *map, t_etris *mino);
+int	read_mino(int fd, t_etris **head);
+void	add_mino_to_list(t_etris **head, t_etris *new);
 
 #endif
