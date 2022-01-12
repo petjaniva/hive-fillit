@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 10:33:11 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 09:33:17 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	print_tetriminos(t_etris *tetri_first)
 		}
 		j = 0;
 		ft_putchar('\n');
-		for(int i = 0; i < 8; i++)
+		/*for(int i = 0; i < 8; i++)
 		{
 			ft_putnbr(tetrimino->coordinates[i]);
 			ft_putchar(',');
 		}
-		ft_putchar('\n');
+		ft_putchar('\n');*/
 		tetrimino = tetrimino->next;
 	}
 	ft_putchar('\n');
@@ -77,15 +77,13 @@ int	main(int argc, char *argv[])
 	if (!validate_tetriminos(tetri_first))
 	{
 			ft_putstr("error");
-			//ft_putendl("???");
-			return (0);
+			return (1);
 	}
-	//ft_putendl("???");
 	solution = solve(tetri_first);
 	if (!solution)
 	{
 		ft_putstr("error");
-		return (0);
+		return (1);
 	}
 	print_solution(solution);
 	//free_memory(tetri_first, solution);*/
