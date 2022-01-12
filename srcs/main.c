@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 15:00:24 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/12 22:18:21 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_minos(t_etris *tetri_first)
 	{
 		ft_putchar(mino->c);
 		ft_putchar('\n');
-		align(mino->yx);
+		align_mino_topleft(mino->yx);
 		while (j < 4)
 		{
 			while (i < 4)
