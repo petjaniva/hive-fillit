@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:43 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 11:07:11 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_solution	*solve(t_etris *tetri_first)
 
 t_solution	*initiate_map(t_etris tetri_first)
 {
-	int			pieces_count;
+	int			minos_count;
 	t_solution	*map;
 	int			min_board_size;
 	int			i;
@@ -38,8 +38,8 @@ t_solution	*initiate_map(t_etris tetri_first)
 	map = malloc(sizeof(*map));
 	if (!map)
 		return (NULL);
-	pieces_count = count_pieces(&tetri_first);
-	min_board_size = sqrt_up(pieces_count * 4);
+	minos_count = count_minos(&tetri_first);
+	min_board_size = sqrt_up(minos_count * 4);
 	map->height = min_board_size;
 	map->board = strnewarray(min_board_size, min_board_size);
 	while (i < min_board_size)
@@ -67,19 +67,19 @@ int	check_if_mino_fit(int min_board_size, t_etris *tetri_first)
 	return (TRUE);
 }
 
-int	count_pieces(t_etris *tetri_first)
+int	count_minos(t_etris *tetri_first)
 {
-	int		pieces_count;
+	int		minos_count;
 	t_etris	*mino;
 
-	pieces_count = 0;
+	minos_count = 0;
 	mino = tetri_first;
 	while (mino)
 	{
-		pieces_count++;
+		minos_count++;
 		mino = mino->next;
 	}
-	return (pieces_count);
+	return (minos_count);
 }
 //TODO replace move_mino with a function that looks for empty square and
 //then checks if the current mino can fit there
