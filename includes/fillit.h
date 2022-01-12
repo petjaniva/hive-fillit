@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 13:50:51 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 09:46:09 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			is_there_overlap(t_solution *solution, t_etris *tetrimino);
 int			check_overlap(t_solution *solution, int y, int x);
 void		place_tetrimino(t_solution *solution, t_etris *tetrimino);
 int			move_tetrimino(t_solution *solution, t_etris *tetrimino);
-void		grow_solution(t_solution *solution);
+t_solution		*grow_solution(t_solution *solution);
 void	print_solution(t_solution *solution);
 void	print_tetriminos(t_etris *tetri_first);
 t_solution	*initiate_solution(t_etris tetri_first);

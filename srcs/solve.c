@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 13:51:28 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 09:45:48 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_solution	*solve(t_etris *tetri_first)
 	t_solution	*solution;
 
 	solution = initiate_solution(*tetri_first);
+	if (!solution)
+		return (NULL);
 	while (!find_solution(solution, tetri_first))
 	{
 		grow_solution(solution);
@@ -34,6 +36,8 @@ t_solution	*initiate_solution(t_etris tetri_first)
 
 	i = 0;
 	solution = malloc(sizeof(*solution));
+	if (!solution)
+		return (NULL);
 	pieces_count = count_pieces(&tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
 	solution->height = min_board_size;
@@ -48,23 +52,24 @@ t_solution	*initiate_solution(t_etris tetri_first)
 	return (solution);
 }
 
-int		check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first)
+int	check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first)
 {
 	t_etris	*tetrimino;
 
 	tetrimino = tetri_first;
 	while (tetrimino)
 	{
-		if (tetrimino->height >= min_board_size || tetrimino->width >= min_board_size)
+		if (tetrimino->height >= min_board_size
+			|| tetrimino->width >= min_board_size)
 			return (FALSE);
 		tetrimino = tetrimino->next;
 	}
 	return (TRUE);
 }
 
-int			count_pieces(t_etris *tetri_first)
+int	count_pieces(t_etris *tetri_first)
 {
-	int pieces_count;
+	int		pieces_count;
 	t_etris	*tetrimino;
 
 	pieces_count = 0;
@@ -77,7 +82,7 @@ int			count_pieces(t_etris *tetri_first)
 	return (pieces_count);
 }
 
-int			find_solution(t_solution *solution, t_etris *tetrimino)
+int	find_solution(t_solution *solution, t_etris *tetrimino)
 {
 	if (!tetrimino)
 		return (TRUE);
@@ -89,12 +94,12 @@ int			find_solution(t_solution *solution, t_etris *tetrimino)
 	return (FALSE);
 }
 
-void		remove_placement(t_solution *solution, t_etris *tetrimino)
+void	remove_placement(t_solution *solution, t_etris *tetrimino)
 {
 	char	to_remove;
 	char	*ptr;
 	size_t	i;
-	
+
 	to_remove = tetrimino->c - 1;
 	i = 0;
 	while (i < solution->height)
@@ -109,7 +114,7 @@ void		remove_placement(t_solution *solution, t_etris *tetrimino)
 	}
 }
 
-int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
+int	is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
 	if (is_there_overlap(solution, tetrimino))
 	{
@@ -122,21 +127,24 @@ int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
 	}
 }
 
-int			is_there_overlap(t_solution *solution, t_etris *tetrimino)
+int	is_there_overlap(t_solution *solution, t_etris *tetrimino)
 {
 	int	i;
+	int	y;
+	int	x;
 
 	i = 0;
 	while (i < 8)
 	{
-		if (check_overlap(solution, tetrimino->y_offset + tetrimino->coordinates[i], tetrimino->x_offset + tetrimino->coordinates[i + 1]))
+		y = tetrimino->y_offset + tetrimino->coordinates[i++];
+		x = tetrimino->x_offset + tetrimino->coordinates[i++];
+		if (check_overlap(solution, y, x))
 			return (TRUE);
-		i = i + 2;
 	}
 	return (FALSE);
 }
 
-int			check_overlap(t_solution *solution, int y, int x)
+int	check_overlap(t_solution *solution, int y, int x)
 {
 	if (solution->solution[y][x] != '.')
 		return (TRUE);
@@ -144,8 +152,7 @@ int			check_overlap(t_solution *solution, int y, int x)
 		return (FALSE);
 }
 
-
-void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
+void	place_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
 	int	i;
 	int	y;
@@ -159,15 +166,12 @@ void		place_tetrimino(t_solution *solution, t_etris *tetrimino)
 		solution->solution[y][x] = tetrimino->c;
 	}
 }
-int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
+
+int	move_tetrimino(t_solution *solution, t_etris *tetrimino)
 {
 	size_t	max_width;
 	size_t	max_height;
 
-	if (tetrimino->x_offset == -1)
-	{
-		tetrimino->x_offset = 0;
-	}
 	max_width = tetrimino->x_offset + tetrimino->width;
 	max_height = tetrimino->y_offset + tetrimino->height;
 	if (max_width == solution->height && max_height == solution->height)
@@ -183,24 +187,19 @@ int			move_tetrimino(t_solution *solution, t_etris *tetrimino)
 		if (max_width != solution->height - 1)
 			return (TRUE);
 	}
+	tetrimino->x_offset = 0;
+	tetrimino->y_offset++;
+	if (max_height == solution->height - 1)
+	{
 		tetrimino->x_offset = 0;
-		tetrimino->y_offset++;
-		if (max_height == solution->height - 1)
-		{
-			tetrimino->x_offset = 0;
-			tetrimino->y_offset = 0;
-			tetrimino->is_first_try = TRUE;
-			return (FALSE);
-		}
-		return (TRUE);
-
-	//increments tetrimino offsets to find a place for it.
-	//On first call initialises offsets to 0
-	//if there is a place where it doesn't go outside of borders returns true
-	//if the board is too small for it, returns false
+		tetrimino->y_offset = 0;
+		tetrimino->is_first_try = TRUE;
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
-void		grow_solution(t_solution *solution)
+t_solution	*grow_solution(t_solution *solution)
 {
 	size_t	new_height;
 	size_t	i;
@@ -209,6 +208,8 @@ void		grow_solution(t_solution *solution)
 	i = 0;
 	ft_free_ptr_array((void **)solution->solution, solution->height);
 	solution->solution = malloc(sizeof(*(solution->solution)) * new_height);
+	if (!solution->solution)
+		return (NULL);
 	while (i < new_height)
 	{
 		solution->solution[i] = ft_strnew(new_height);
@@ -216,4 +217,5 @@ void		grow_solution(t_solution *solution)
 		++i;
 	}
 	solution->height = new_height;
+	return (solution);
 }
