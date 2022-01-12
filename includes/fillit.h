@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 12:56:58 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 15:03:16 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_tetris
 	char			c;
 	char			yx[4][4];
 	int				coordinates[8];
-	int				x_offset;
-	int				y_offset;
+	size_t			x_offset;
+	size_t			y_offset;
 	int				height;
 	int				width;
 	int				is_first_try;
@@ -112,5 +112,6 @@ void		remove_placement(t_solution *map, t_etris *mino);
 int	find_place_for_mino(t_solution *map, t_etris *mino);
 int	try_placing_mino(t_solution *map, t_etris *mino);
 int	mino_in_bounds(t_solution *map, t_etris *mino);
+void	increment_offsets(t_solution *map, t_etris *mino);
 
 #endif
