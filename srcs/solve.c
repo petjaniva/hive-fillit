@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 11:07:11 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 13:39:07 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,64 @@ int	find_solution(t_solution *map, t_etris *mino)
 {
 	if (!mino)
 		return (TRUE);
-	while (move_mino(map, mino))
-		if (is_place_for_mino(map, mino))
-			if (find_solution(map, mino->next))
+	while (find_place_for_mino(map, mino))
+	{
+		if (find_solution(map, mino->next))
 				return (TRUE);
+	}
 	remove_placement(map, mino);
+	//need to increment offsets
 	return (FALSE);
+}
+
+int	find_place_for_mino(t_solution *map, t_etris *mino)
+{
+	char	*empty;
+	size_t	i;
+
+	i = mino->y_offset;
+	while (i < map->height)
+	{
+		
+		empty = ft_strchr(&map->board[i][mino->x_offset], '.');
+		while (empty)
+		{
+			mino->y_offset = i;
+			mino->x_offset = empty - map->board[i];
+			if (try_placing_mino(map, mino))
+			{
+				place_mino(map, mino);
+				return (TRUE);
+			}
+			empty = ft_strchr(empty + 1, '.');
+		}
+		mino->x_offset = 0;
+		++i;
+	}
+	return (FALSE);
+}
+
+int	try_placing_mino(t_solution *map, t_etris *mino)
+{
+	if (mino_in_bounds(map, mino))
+	{
+		if (!is_there_overlap(map, mino))
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+int	mino_in_bounds(t_solution *map, t_etris *mino)
+{
+	size_t	y_max;
+	size_t	x_max;
+
+	y_max = mino->y_offset + mino->height;
+	x_max = mino->x_offset + mino->width;
+	if (y_max >= map->height || x_max >= map->height)
+		return (FALSE);
+	else
+		return (TRUE);
 }
 
 void	remove_placement(t_solution *map, t_etris *mino)
@@ -105,26 +157,13 @@ void	remove_placement(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < map->height)
 	{
-		ptr = ft_strrchr(map->board[i], to_remove);
+		ptr = ft_strchr(map->board[i], to_remove);
 		while (ptr)
 		{
 			*ptr = '.';
-			ptr = ft_strrchr(map->board[i], to_remove);
+			ptr = ft_strchr(map->board[i], to_remove);
 		}
 		++i;
-	}
-}
-
-int	is_place_for_mino(t_solution *map, t_etris *mino)
-{
-	if (is_there_overlap(map, mino))
-	{
-		return (FALSE);
-	}
-	else
-	{
-		place_mino(map, mino);
-		return (TRUE);
 	}
 }
 
@@ -166,38 +205,6 @@ void	place_mino(t_solution *map, t_etris *mino)
 		x = mino->x_offset + mino->coordinates[i++];
 		map->board[y][x] = mino->c;
 	}
-}
-
-int	move_mino(t_solution *map, t_etris *mino)
-{
-	size_t	max_width;
-	size_t	max_height;
-
-	max_width = mino->x_offset + mino->width;
-	max_height = mino->y_offset + mino->height;
-	if (max_width == map->height && max_height == map->height)
-		return (FALSE);
-	else if (max_width < map->height)
-	{
-		if (mino->is_first_try)
-		{
-			mino->is_first_try = FALSE;
-			return (TRUE);
-		}
-		mino->x_offset++;
-		if (max_width != map->height - 1)
-			return (TRUE);
-	}
-	mino->x_offset = 0;
-	mino->y_offset++;
-	if (max_height == map->height - 1)
-	{
-		mino->x_offset = 0;
-		mino->y_offset = 0;
-		mino->is_first_try = TRUE;
-		return (FALSE);
-	}
-	return (TRUE);
 }
 
 t_solution	*grow_board(t_solution *map)

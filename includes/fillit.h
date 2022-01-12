@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:14 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 12:56:58 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**strnewarray(int pointers, int chars);
 void	find_size(t_etris *mino);
 t_solution	*solve(t_etris *tetri_first);
 t_solution	*initiate_map(t_etris tetri_first);
-int			count_pieces(t_etris *tetri_first);
+int			count_minos(t_etris *tetri_first);
 int			find_solution(t_solution *map, t_etris *mino);
 int			is_place_for_mino(t_solution *map, t_etris *mino);
 int			is_there_overlap(t_solution *map, t_etris *mino);
@@ -109,5 +109,8 @@ void	print_minos(t_etris *tetri_first);
 t_solution	*initiate_map(t_etris tetri_first);
 int		check_if_mino_fit(int min_board_size, t_etris *tetri_first);
 void		remove_placement(t_solution *map, t_etris *mino);
+int	find_place_for_mino(t_solution *map, t_etris *mino);
+int	try_placing_mino(t_solution *map, t_etris *mino);
+int	mino_in_bounds(t_solution *map, t_etris *mino);
 
 #endif
