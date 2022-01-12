@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 09:45:48 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 10:45:43 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,54 @@
 
 t_solution	*solve(t_etris *tetri_first)
 {
-	t_solution	*solution;
+	t_solution	*map;
 
-	solution = initiate_solution(*tetri_first);
-	if (!solution)
+	map = initiate_map(*tetri_first);
+	if (!map)
 		return (NULL);
-	while (!find_solution(solution, tetri_first))
+	while (!find_solution(map, tetri_first))
 	{
-		grow_solution(solution);
+		grow_board(map);
 	}
-	return (solution);
+	return (map);
 }
 
-t_solution	*initiate_solution(t_etris tetri_first)
+t_solution	*initiate_map(t_etris tetri_first)
 {
 	int			pieces_count;
-	t_solution	*solution;
+	t_solution	*map;
 	int			min_board_size;
 	int			i;
 
 	i = 0;
-	solution = malloc(sizeof(*solution));
-	if (!solution)
+	map = malloc(sizeof(*map));
+	if (!map)
 		return (NULL);
 	pieces_count = count_pieces(&tetri_first);
 	min_board_size = sqrt_up(pieces_count * 4);
-	solution->height = min_board_size;
-	solution->solution = strnewarray(min_board_size, min_board_size);
+	map->height = min_board_size;
+	map->board = strnewarray(min_board_size, min_board_size);
 	while (i < min_board_size)
 	{
-		ft_memset(solution->solution[i], '.', min_board_size);
+		ft_memset(map->board[i], '.', min_board_size);
 		++i;
 	}
-	if (!check_if_tetrimino_fit(min_board_size, &tetri_first))
-		grow_solution(solution);
-	return (solution);
+	if (!check_if_mino_fit(min_board_size, &tetri_first))
+		grow_board(map);
+	return (map);
 }
 
-int	check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first)
+int	check_if_mino_fit(int min_board_size, t_etris *tetri_first)
 {
-	t_etris	*tetrimino;
+	t_etris	*mino;
 
-	tetrimino = tetri_first;
-	while (tetrimino)
+	mino = tetri_first;
+	while (mino)
 	{
-		if (tetrimino->height >= min_board_size
-			|| tetrimino->width >= min_board_size)
+		if (mino->height >= min_board_size
+			|| mino->width >= min_board_size)
 			return (FALSE);
-		tetrimino = tetrimino->next;
+		mino = mino->next;
 	}
 	return (TRUE);
 }
@@ -70,64 +70,65 @@ int	check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first)
 int	count_pieces(t_etris *tetri_first)
 {
 	int		pieces_count;
-	t_etris	*tetrimino;
+	t_etris	*mino;
 
 	pieces_count = 0;
-	tetrimino = tetri_first;
-	while (tetrimino)
+	mino = tetri_first;
+	while (mino)
 	{
 		pieces_count++;
-		tetrimino = tetrimino->next;
+		mino = mino->next;
 	}
 	return (pieces_count);
 }
-
-int	find_solution(t_solution *solution, t_etris *tetrimino)
+//TODO replace move_mino with a function that looks for empty square and
+//then checks if the current mino can fit there
+int	find_solution(t_solution *map, t_etris *mino)
 {
-	if (!tetrimino)
+	if (!mino)
 		return (TRUE);
-	while (move_tetrimino(solution, tetrimino))
-		if (is_place_for_tetrimino(solution, tetrimino))
-			if (find_solution(solution, tetrimino->next))
+	while (move_mino(map, mino))
+		if (is_place_for_mino(map, mino))
+			if (find_solution(map, mino->next))
 				return (TRUE);
-	remove_placement(solution, tetrimino);
+	remove_placement(map, mino);
 	return (FALSE);
 }
 
-void	remove_placement(t_solution *solution, t_etris *tetrimino)
+void	remove_placement(t_solution *map, t_etris *mino)
 {
 	char	to_remove;
 	char	*ptr;
 	size_t	i;
 
-	to_remove = tetrimino->c - 1;
+	to_remove = mino->c - 1;
 	i = 0;
-	while (i < solution->height)
+	while (i < map->height)
 	{
-		ptr = ft_strrchr(solution->solution[i], to_remove);
+		ptr = ft_strrchr(map->board[i], to_remove);
 		while (ptr)
 		{
 			*ptr = '.';
-			ptr = ft_strrchr(solution->solution[i], to_remove);
+			ptr = ft_strrchr(map->board[i], to_remove);
 		}
 		++i;
 	}
 }
 
-int	is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino)
+int	is_place_for_mino(t_solution *map, t_etris *mino)
 {
-	if (is_there_overlap(solution, tetrimino))
+	if (is_there_overlap(map, mino))
 	{
 		return (FALSE);
 	}
 	else
 	{
-		place_tetrimino(solution, tetrimino);
+		place_mino(map, mino);
 		return (TRUE);
 	}
 }
 
-int	is_there_overlap(t_solution *solution, t_etris *tetrimino)
+int	is_there_overlap(t_solution *map, t_etris *mino)
 {
 	int	i;
 	int	y;
@@ -136,23 +137,23 @@ int	is_there_overlap(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		y = tetrimino->y_offset + tetrimino->coordinates[i++];
-		x = tetrimino->x_offset + tetrimino->coordinates[i++];
-		if (check_overlap(solution, y, x))
+		y = mino->y_offset + mino->coordinates[i++];
+		x = mino->x_offset + mino->coordinates[i++];
+		if (check_overlap(map, y, x))
 			return (TRUE);
 	}
 	return (FALSE);
 }
 
-int	check_overlap(t_solution *solution, int y, int x)
+int	check_overlap(t_solution *map, int y, int x)
 {
-	if (solution->solution[y][x] != '.')
+	if (map->board[y][x] != '.')
 		return (TRUE);
 	else
 		return (FALSE);
 }
 
-void	place_tetrimino(t_solution *solution, t_etris *tetrimino)
+void	place_mino(t_solution *map, t_etris *mino)
 {
 	int	i;
 	int	y;
@@ -161,61 +162,61 @@ void	place_tetrimino(t_solution *solution, t_etris *tetrimino)
 	i = 0;
 	while (i < 8)
 	{
-		y = tetrimino->y_offset + tetrimino->coordinates[i++];
-		x = tetrimino->x_offset + tetrimino->coordinates[i++];
-		solution->solution[y][x] = tetrimino->c;
+		y = mino->y_offset + mino->coordinates[i++];
+		x = mino->x_offset + mino->coordinates[i++];
+		map->board[y][x] = mino->c;
 	}
 }
 
-int	move_tetrimino(t_solution *solution, t_etris *tetrimino)
+int	move_mino(t_solution *map, t_etris *mino)
 {
 	size_t	max_width;
 	size_t	max_height;
 
-	max_width = tetrimino->x_offset + tetrimino->width;
-	max_height = tetrimino->y_offset + tetrimino->height;
-	if (max_width == solution->height && max_height == solution->height)
+	max_width = mino->x_offset + mino->width;
+	max_height = mino->y_offset + mino->height;
+	if (max_width == map->height && max_height == map->height)
 		return (FALSE);
-	else if (max_width < solution->height)
+	else if (max_width < map->height)
 	{
-		if (tetrimino->is_first_try)
+		if (mino->is_first_try)
 		{
-			tetrimino->is_first_try = FALSE;
+			mino->is_first_try = FALSE;
 			return (TRUE);
 		}
-		tetrimino->x_offset++;
-		if (max_width != solution->height - 1)
+		mino->x_offset++;
+		if (max_width != map->height - 1)
 			return (TRUE);
 	}
-	tetrimino->x_offset = 0;
-	tetrimino->y_offset++;
-	if (max_height == solution->height - 1)
+	mino->x_offset = 0;
+	mino->y_offset++;
+	if (max_height == map->height - 1)
 	{
-		tetrimino->x_offset = 0;
-		tetrimino->y_offset = 0;
-		tetrimino->is_first_try = TRUE;
+		mino->x_offset = 0;
+		mino->y_offset = 0;
+		mino->is_first_try = TRUE;
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-t_solution	*grow_solution(t_solution *solution)
+t_solution	*grow_board(t_solution *map)
 {
 	size_t	new_height;
 	size_t	i;
 
-	new_height = solution->height + 1;
+	new_height = map->height + 1;
 	i = 0;
-	ft_free_ptr_array((void **)solution->solution, solution->height);
-	solution->solution = malloc(sizeof(*(solution->solution)) * new_height);
-	if (!solution->solution)
+	ft_free_ptr_array((void **)map->board, map->height);
+	map->board = malloc(sizeof(*(map->board)) * new_height);
+	if (!map->board)
 		return (NULL);
 	while (i < new_height)
 	{
-		solution->solution[i] = ft_strnew(new_height);
-		ft_memset(solution->solution[i], '.', new_height);
+		map->board[i] = ft_strnew(new_height);
+		ft_memset(map->board[i], '.', new_height);
 		++i;
 	}
-	solution->height = new_height;
-	return (solution);
+	map->height = new_height;
+	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 09:46:09 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 10:45:14 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_tetris
 typedef struct s_olution
 {
 	size_t			height;
-	char			**solution;
+	char			**board;
 }				t_solution;
 
 # define I		(int[8]) {0,0, 1,0, 2,0, 3,0}
@@ -78,36 +78,36 @@ typedef struct s_olution
 						{0,1, 1,0, 1,1, 2,0}}
 
 int		check_line(char *line);
-int		there_is_next_tetrimino(int fd, char **line);
-t_etris	*get_next_tetrimino(int fd, char **line);
+int		there_is_next_mino(int fd, char **line);
+t_etris	*get_next_mino(int fd, char **line);
 t_etris	*from_file_to_list(int fd);
-t_etris	*read_tetriminos(char *filename);
-t_etris	*create_tetrimino(char yx[4][4]);
+t_etris	*read_minos(char *filename);
+t_etris	*create_mino(char yx[4][4]);
 int	sqrt_up(unsigned int num);
-int	is_first_row_empty(char tetrimino[4][4]);
-int	is_first_col_empty(char tetrimino[4][4]);
-void	shift_cols(char tetrimino[4][4]);
-void	shift_rows(char tetrimino[4][4]);
-void	align(char tetrimino[4][4]);
-void	convert(t_etris *tetrimino);
+int	is_first_row_empty(char mino[4][4]);
+int	is_first_col_empty(char mino[4][4]);
+void	shift_cols(char mino[4][4]);
+void	shift_rows(char mino[4][4]);
+void	align(char mino[4][4]);
+void	convert(t_etris *mino);
 int	check_shape(int coordinates[8]);
-int	validate_tetriminos(t_etris *tetri_first);
+int	validate_minos(t_etris *tetri_first);
 char	**strnewarray(int pointers, int chars);
-void	find_size(t_etris *tetrimino);
+void	find_size(t_etris *mino);
 t_solution	*solve(t_etris *tetri_first);
-t_solution	*initiate_solution(t_etris tetri_first);
+t_solution	*initiate_map(t_etris tetri_first);
 int			count_pieces(t_etris *tetri_first);
-int			find_solution(t_solution *solution, t_etris *tetrimino);
-int			is_place_for_tetrimino(t_solution *solution, t_etris *tetrimino);
-int			is_there_overlap(t_solution *solution, t_etris *tetrimino);
-int			check_overlap(t_solution *solution, int y, int x);
-void		place_tetrimino(t_solution *solution, t_etris *tetrimino);
-int			move_tetrimino(t_solution *solution, t_etris *tetrimino);
-t_solution		*grow_solution(t_solution *solution);
-void	print_solution(t_solution *solution);
-void	print_tetriminos(t_etris *tetri_first);
-t_solution	*initiate_solution(t_etris tetri_first);
-int		check_if_tetrimino_fit(int min_board_size, t_etris *tetri_first);
-void		remove_placement(t_solution *solution, t_etris *tetrimino);
+int			find_solution(t_solution *map, t_etris *mino);
+int			is_place_for_mino(t_solution *map, t_etris *mino);
+int			is_there_overlap(t_solution *map, t_etris *mino);
+int			check_overlap(t_solution *map, int y, int x);
+void		place_mino(t_solution *map, t_etris *mino);
+int			move_mino(t_solution *map, t_etris *mino);
+t_solution		*grow_board(t_solution *map);
+void	print_solution(t_solution *map);
+void	print_minos(t_etris *tetri_first);
+t_solution	*initiate_map(t_etris tetri_first);
+int		check_if_mino_fit(int min_board_size, t_etris *tetri_first);
+void		remove_placement(t_solution *map, t_etris *mino);
 
 #endif

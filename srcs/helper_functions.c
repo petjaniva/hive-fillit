@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/11 15:56:22 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/12 10:41:50 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	sqrt_up(unsigned int num)
 	return (i);
 }
 
-void	convert(t_etris *tetrimino)
+void	convert(t_etris *mino)
 {
 	int	row;
 	int	col;
 	int	i;
 
-	ft_bzero(tetrimino->coordinates, 8);
+	ft_bzero(mino->coordinates, 8);
 	row = 0;
 	i = 0;
 	while (row < 4)
@@ -37,10 +37,10 @@ void	convert(t_etris *tetrimino)
 		col = 0;
 		while (col < 4)
 		{
-			if (tetrimino->yx[row][col] == '#')
+			if (mino->yx[row][col] == '#')
 			{
-				tetrimino->coordinates[i++] = row;
-				tetrimino->coordinates[i++] = col;
+				mino->coordinates[i++] = row;
+				mino->coordinates[i++] = col;
 			}
 			col++;
 		}
@@ -48,19 +48,19 @@ void	convert(t_etris *tetrimino)
 	}
 }
 
-void	find_size(t_etris *tetrimino)
+void	find_size(t_etris *mino)
 {
 	int	i;
 
-	tetrimino->height = tetrimino->coordinates[0];
-	tetrimino->width = tetrimino->coordinates[1];
+	mino->height = mino->coordinates[0];
+	mino->width = mino->coordinates[1];
 	i = 2;
 	while (i < 8)
 	{
-		if (tetrimino->coordinates[i] > tetrimino->height)
-			tetrimino->height = tetrimino->coordinates[i];
-		if (tetrimino->coordinates[i + 1] > tetrimino->width)
-			tetrimino->width = tetrimino->coordinates[i + 1];
+		if (mino->coordinates[i] > mino->height)
+			mino->height = mino->coordinates[i];
+		if (mino->coordinates[i + 1] > mino->width)
+			mino->width = mino->coordinates[i + 1];
 		i = i + 2;
 	}
 }

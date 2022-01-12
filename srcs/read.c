@@ -6,14 +6,14 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 09:25:47 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 10:45:58 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-t_etris	*read_tetriminos(char *filename)
+t_etris	*read_minos(char *filename)
 {
 	int		fd;	
 	t_etris	*tetri_first;
@@ -22,7 +22,7 @@ t_etris	*read_tetriminos(char *filename)
 	tetri_first = from_file_to_list(fd);
 	return (tetri_first);
 }
-
+//TODO Too long, split or change?
 t_etris	*from_file_to_list(int fd)
 {
 	char	*line;
@@ -31,9 +31,9 @@ t_etris	*from_file_to_list(int fd)
 	t_etris	*tetri_new;
 
 	tetri_first = NULL;
-	while (there_is_next_tetrimino(fd, &line))
+	while (there_is_next_mino(fd, &line))
 	{
-		tetri_new = get_next_tetrimino(fd, &line);
+		tetri_new = get_next_mino(fd, &line);
 		if (!tetri_new)
 			return (NULL);
 		if (!tetri_first)
@@ -55,11 +55,11 @@ t_etris	*from_file_to_list(int fd)
 
 /*
 ** Reads the next line from the file. If line exists and if strlen is = 0, checks if next line
-** is line of a valid tetrimino. If strlen of line was != 0, checks if that line
-** is of a valid tetrimino.
+** is line of a valid mino. If strlen of line was != 0, checks if that line
+** is of a valid mino.
 */
-
-int	there_is_next_tetrimino(int fd, char **line)
+// TODO error check for no new line between minos
+int	there_is_next_mino(int fd, char **line)
 {
 	if (ft_get_next_line(fd, line))
 	{
@@ -91,9 +91,9 @@ int	check_line(char *line)
 	return (TRUE);
 }
 
-t_etris	*get_next_tetrimino(int fd, char **line)
+t_etris	*get_next_mino(int fd, char **line)
 {
-	t_etris	*tetrimino;
+	t_etris	*mino;
 	char	yx[4][4];
 	int		i;
 
@@ -105,24 +105,25 @@ t_etris	*get_next_tetrimino(int fd, char **line)
 			return (NULL);
 		++i;
 	}
-	tetrimino = create_tetrimino(yx);
-	return (tetrimino);
+	mino = create_mino(yx);
+	return (mino);
 }
 
-t_etris	*create_tetrimino(char yx[4][4])
+//TODO: rename align and convert?
+t_etris	*create_mino(char yx[4][4])
 {
-	t_etris	*tetrimino;
+	t_etris	*mino;
 
-	tetrimino = malloc(sizeof(*tetrimino));
-	if (!tetrimino)
+	mino = malloc(sizeof(*mino));
+	if (!mino)
 		return (NULL);
-	ft_memcpy(tetrimino->yx, yx, sizeof(int) * 16);
-	align(tetrimino->yx);
-	convert(tetrimino);
-	tetrimino->x_offset = 0;
-	tetrimino->y_offset = 0;
-	tetrimino->is_first_try = TRUE;
-	find_size(tetrimino);
-	tetrimino->next = NULL;
-	return (tetrimino);
+	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
+	align(mino->yx);
+	convert(mino);
+	mino->x_offset = 0;
+	mino->y_offset = 0;
+	mino->is_first_try = TRUE;
+	find_size(mino);
+	mino->next = NULL;
+	return (mino);
 }
