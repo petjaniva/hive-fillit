@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 09:33:17 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/12 09:34:22 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	print_tetriminos(t_etris *tetri_first)
 		}
 		j = 0;
 		ft_putchar('\n');
-		/*for(int i = 0; i < 8; i++)
+		for(int i = 0; i < 8; i++)
 		{
 			ft_putnbr(tetrimino->coordinates[i]);
 			ft_putchar(',');
 		}
-		ft_putchar('\n');*/
+		ft_putchar('\n');
 		tetrimino = tetrimino->next;
 	}
 	ft_putchar('\n');
