@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 09:34:22 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/12 09:43:36 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,23 @@ int	main(int argc, char *argv[])
 	
 	if (argc != 2)
 	{
-		ft_putstr("Please give filename");
+		ft_putstr("usage: ");
+		ft_putstr(argv[0]);
+		ft_putendl(" file_name");
+		return (1);
 	}
 	tetri_first = read_tetriminos(argv[1]);
 	print_tetriminos(tetri_first);
 	if (!validate_tetriminos(tetri_first))
 	{
-			ft_putstr("error");
-			return (1);
+			ft_putendl("error");
+			return (2);
 	}
 	solution = solve(tetri_first);
 	if (!solution)
 	{
-		ft_putstr("error");
-		return (1);
+		ft_putendl("error");
+		return (3);
 	}
 	print_solution(solution);
 	//free_memory(tetri_first, solution);*/
