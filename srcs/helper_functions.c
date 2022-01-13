@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:41:50 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/12 22:17:51 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	sqrt_up(unsigned int num)
 	return (i);
 }
 
-void	convert(t_etris *mino)
+void	save_yx_coordinates(t_etris *mino)
 {
 	int	row;
 	int	col;

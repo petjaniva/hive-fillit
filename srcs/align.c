@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:49:00 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/01/11 15:52:16 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/12 22:11:27 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	shift_rows(char tetrimino[4][4])
 	}
 }
 
-void	align(char tetrimino[4][4])
+void	align_mino_topleft(char tetrimino[4][4])
 {
 	while (is_first_col_empty(tetrimino) == TRUE)
 		shift_cols(tetrimino);

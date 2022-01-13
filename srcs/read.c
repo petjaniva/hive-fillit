@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 10:04:50 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 10:11:24 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,6 @@ t_etris	*from_file_to_list(char *filename)
 	if (read_mino(fd, &tetri_first) == TRUE)
 		return (tetri_first);
 	return (NULL);
-}
-
-int	check_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strlen(line) != 4)
-		return (FALSE);
-	while (line[i])
-	{
-		if (line[i] != '#' && line[i] != '.')
-			return (FALSE);
-		++i;
-	}
-	return (TRUE);
-}
-
-t_etris	*create_mino(char yx[4][4])
-{
-	t_etris	*mino;
-
-	mino = malloc(sizeof(*mino));
-	if (!mino)
-		return (NULL);
-	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
-	align(mino->yx);
-	convert(mino);
-	mino->x_offset = 0;
-	mino->y_offset = 0;
-	mino->is_first_try = TRUE;
-	find_size(mino);
-	mino->next = NULL;
-	return (mino);
 }
 
 int	read_mino(int fd, t_etris **head)
@@ -111,4 +77,38 @@ void	add_mino_to_list(t_etris **head, t_etris *new)
 		tmp->next = new;
 		new->c = tmp->c + 1;
 	}
+}
+
+t_etris	*create_mino(char yx[4][4])
+{
+	t_etris	*mino;
+
+	mino = malloc(sizeof(*mino));
+	if (!mino)
+		return (NULL);
+	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
+	align_mino_topleft(mino->yx);
+	save_yx_coordinates(mino); //alternative name yx_to_int8?
+	mino->x_offset = 0;
+	mino->y_offset = 0;
+	mino->is_first_try = TRUE;
+	find_size(mino);
+	mino->next = NULL;
+	return (mino);
+}
+
+int	check_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strlen(line) != 4)
+		return (FALSE);
+	while (line[i])
+	{
+		if (line[i] != '#' && line[i] != '.')
+			return (FALSE);
+		++i;
+	}
+	return (TRUE);
 }
