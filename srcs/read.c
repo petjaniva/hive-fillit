@@ -6,73 +6,94 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:58 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 11:27:07 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-t_etris	*read_minos(char *filename)
+t_etris	*from_file_to_list(char *filename)
 {
-	int		fd;	
+	int		fd;
 	t_etris	*tetri_first;
-
-	fd = open(filename, O_RDONLY);
-	tetri_first = from_file_to_list(fd);
-	return (tetri_first);
-}
-//TODO Too long, split or change?
-t_etris	*from_file_to_list(int fd)
-{
-	char	*line;
-	t_etris	*tetri_first;
-	t_etris	*tetri_old;
-	t_etris	*tetri_new;
 
 	tetri_first = NULL;
-	while (there_is_next_mino(fd, &line))
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 	{
-		tetri_new = get_next_mino(fd, &line);
-		if (!tetri_new)
-			return (NULL);
-		if (!tetri_first)
+		ft_putendl("unable to read file");
+		return (NULL);
+	}
+	if (read_mino(fd, &tetri_first) == FALSE)
+		return (NULL);
+	return (tetri_first);
+}
+
+int	read_mino(int fd, t_etris **head)
+{
+	char	*line;
+	char	yx[4][4];
+	int		i;
+
+	i = 1;
+	while (ft_get_next_line(fd, &line) > 0)
+	{
+		if (i % 5 == 0)
 		{
-			tetri_first = tetri_new;
-			tetri_first->c = 'A';
+			if (ft_strlen(line) != 0)
+				return (FALSE);
+			add_mino_to_list(head, create_mino(yx));
 		}
 		else
 		{
-			if (tetri_old->c == 'Z')
-				return (NULL);
-			tetri_new->c = tetri_old->c + 1;
-			tetri_old->next = tetri_new;
-		}	
-		tetri_old = tetri_new;
+			if (check_line(line) == FALSE)
+				return (FALSE);
+			ft_strcpy(yx[i % 5 - 1], line);
+		}
+		i++;
 	}
-	return (tetri_first);
+	if (i % 5 != 0 || i > 5 * 26)
+		return (FALSE);
+	add_mino_to_list(head, create_mino(yx));
+	return (TRUE);
 }
 
-/*
-** Reads the next line from the file. If line exists and if strlen is = 0, checks if next line
-** is line of a valid mino. If strlen of line was != 0, checks if that line
-** is of a valid mino.
-*/
-// TODO error check for no new line between minos
-int	there_is_next_mino(int fd, char **line)
+void	add_mino_to_list(t_etris **head, t_etris *new)
 {
-	if (ft_get_next_line(fd, line))
+	t_etris	*tmp;
+
+	if (*head == NULL)
 	{
-		if (ft_strlen(*line) == 0)
-		{
-			if (ft_get_next_line(fd, line))
-				if (check_line(*line))
-					return (TRUE);
-		}
-		else if (check_line(*line))
-			return (TRUE);
+		*head = new;
+		(*head)->c = 'A';
 	}
-	return (FALSE);
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->c = tmp->c + 1;
+	}
+}
+
+t_etris	*create_mino(char yx[4][4])
+{
+	t_etris	*mino;
+
+	mino = malloc(sizeof(*mino));
+	if (!mino)
+		return (NULL);
+	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
+	align_mino_topleft(mino->yx);
+	save_yx_coordinates(mino);
+	mino->x_offset = 0;
+	mino->y_offset = 0;
+	mino->is_first_try = TRUE;
+	find_size(mino);
+	mino->next = NULL;
+	return (mino);
 }
 
 int	check_line(char *line)
@@ -89,41 +110,4 @@ int	check_line(char *line)
 		++i;
 	}
 	return (TRUE);
-}
-
-t_etris	*get_next_mino(int fd, char **line)
-{
-	t_etris	*mino;
-	char	yx[4][4];
-	int		i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_strcpy(yx[i], *line);
-		if (!ft_get_next_line(fd, line) && i != 3)
-			return (NULL);
-		++i;
-	}
-	mino = create_mino(yx);
-	return (mino);
-}
-
-//TODO: rename align and convert?
-t_etris	*create_mino(char yx[4][4])
-{
-	t_etris	*mino;
-
-	mino = malloc(sizeof(*mino));
-	if (!mino)
-		return (NULL);
-	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
-	align(mino->yx);
-	convert(mino);
-	mino->x_offset = 0;
-	mino->y_offset = 0;
-	mino->is_first_try = TRUE;
-	find_size(mino);
-	mino->next = NULL;
-	return (mino);
 }

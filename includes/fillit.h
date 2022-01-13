@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 08:36:56 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 11:45:36 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,15 @@ typedef struct s_olution
 int		check_line(char *line);
 int		there_is_next_mino(int fd, char **line);
 t_etris	*get_next_mino(int fd, char **line);
-t_etris	*from_file_to_list(int fd);
-t_etris	*read_minos(char *filename);
+t_etris	*from_file_to_list(char *filename);
 t_etris	*create_mino(char yx[4][4]);
 int	sqrt_up(unsigned int num);
 int	is_first_row_empty(char mino[4][4]);
 int	is_first_col_empty(char mino[4][4]);
 void	shift_cols(char mino[4][4]);
 void	shift_rows(char mino[4][4]);
-void	align(char mino[4][4]);
-void	convert(t_etris *mino);
+void	align_mino_topleft(char tetrimino[4][4]);
+void	save_yx_coordinates(t_etris *mino);
 int	check_shape(int coordinates[8]);
 int	validate_minos(t_etris *tetri_first);
 char	**strnewarray(int pointers, int chars);
@@ -114,5 +113,7 @@ int	try_placing_mino(t_solution *map, t_etris *mino);
 int	mino_in_bounds(t_solution *map, t_etris *mino);
 void	increment_offsets(t_solution *map, t_etris *mino);
 void	create_origin_coords(t_etris *mino);
+int	read_mino(int fd, t_etris **head);
+void	add_mino_to_list(t_etris **head, t_etris *new);
 
 #endif

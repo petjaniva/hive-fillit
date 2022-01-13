@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:49:00 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/01/12 11:05:12 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 11:47:25 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	shift_rows(char mino[4][4])
 	}
 }
 
-void	align(char mino[4][4])
+void	align_mino_topleft(char mino[4][4])
 {
 	while (is_first_col_empty(mino) == TRUE)
 		shift_cols(mino);
