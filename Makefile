@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/12 09:42:04 by bkandemi         ###   ########.fr        #
+#    Updated: 2022/01/13 10:25:04 by pniva            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS = srcs/main.c \
 		srcs/read.c \
 		srcs/validate.c \
 		srcs/solve.c \
-		srcs/align.c
+		srcs/align.c \
+		srcs/solve_helpers.c
 
 NAME = fillit
 

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:45:14 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 08:36:56 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ typedef struct s_tetris
 	char			c;
 	char			yx[4][4];
 	int				coordinates[8];
-	int				x_offset;
-	int				y_offset;
+	int				coord_origin[8];
+	int			x_offset;
+	int			y_offset;
 	int				height;
 	int				width;
 	int				is_first_try;
@@ -33,7 +34,7 @@ typedef struct s_tetris
 
 typedef struct s_olution
 {
-	size_t			height;
+	int			height;
 	char			**board;
 }				t_solution;
 
@@ -95,8 +96,8 @@ int	validate_minos(t_etris *tetri_first);
 char	**strnewarray(int pointers, int chars);
 void	find_size(t_etris *mino);
 t_solution	*solve(t_etris *tetri_first);
-t_solution	*initiate_map(t_etris tetri_first);
-int			count_pieces(t_etris *tetri_first);
+t_solution	*initiate_map(t_etris *tetri_first);
+int			count_minos(t_etris *tetri_first);
 int			find_solution(t_solution *map, t_etris *mino);
 int			is_place_for_mino(t_solution *map, t_etris *mino);
 int			is_there_overlap(t_solution *map, t_etris *mino);
@@ -106,8 +107,12 @@ int			move_mino(t_solution *map, t_etris *mino);
 t_solution		*grow_board(t_solution *map);
 void	print_solution(t_solution *map);
 void	print_minos(t_etris *tetri_first);
-t_solution	*initiate_map(t_etris tetri_first);
 int		check_if_mino_fit(int min_board_size, t_etris *tetri_first);
 void		remove_placement(t_solution *map, t_etris *mino);
+int	find_place_for_mino(t_solution *map, t_etris *mino);
+int	try_placing_mino(t_solution *map, t_etris *mino);
+int	mino_in_bounds(t_solution *map, t_etris *mino);
+void	increment_offsets(t_solution *map, t_etris *mino);
+void	create_origin_coords(t_etris *mino);
 
 #endif
