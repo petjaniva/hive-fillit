@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:21:27 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 10:31:07 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 10:36:14 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	create_origin_coords(t_etris *mino)
 			++i;
 		}
 	}
-	else if (mino->coordinates[1] != 0)
+	else
 	{
 		num = mino->coordinates[1];
 		while (i < 8)
@@ -66,8 +66,6 @@ void	create_origin_coords(t_etris *mino)
 			++i;
 		}
 	}
-	else
-		ft_memcpy(mino->coord_origin, mino->coordinates, sizeof(int) * 8);
 }
 
 

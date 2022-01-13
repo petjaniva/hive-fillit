@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 10:28:13 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 11:21:52 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,24 @@ int	find_solution(t_solution *map, t_etris *mino)
 	return (FALSE);
 }
 
+/* Tries to find an empty spot on the board where the mino
+   fits without going out of bounds and overlapping other 
+   minos*/
+
 int	find_place_for_mino(t_solution *map, t_etris *mino)
 {
 	char	*empty;
-	int		i;
+	int		row;
 
-	i = mino->y_offset;
-	while (i < map->height)
+	row = mino->y_offset;
+	while (row < map->height)
 	{
 		
-		empty = ft_strchr(&map->board[i][mino->x_offset], '.');
+		empty = ft_strchr(&map->board[row][mino->x_offset], '.');
 		while (empty)
 		{
-			mino->y_offset = i;
-			mino->x_offset = empty - map->board[i];
+			mino->y_offset = row;
+			mino->x_offset = empty - map->board[row];
 			if (try_placing_mino(map, mino))
 			{
 				return (TRUE);
@@ -66,10 +70,12 @@ int	find_place_for_mino(t_solution *map, t_etris *mino)
 			empty = ft_strchr(empty + 1, '.');
 		}
 		mino->x_offset = 0;
-		++i;
+		++row;
 	}
 	return (FALSE);
 }
+/* Tries to place mino with the calculated offsets by checking 
+   if the mino is in bounds and doesn't overlap with other minos*/
 
 int	try_placing_mino(t_solution *map, t_etris *mino)
 {
@@ -80,7 +86,8 @@ int	try_placing_mino(t_solution *map, t_etris *mino)
 	}
 	return (FALSE);
 }
-
+/* Retuns TRUE if none of minos 4 spots go over the squares
+   dimensions */
 int	mino_in_bounds(t_solution *map, t_etris *mino)
 {
 	int	i;
