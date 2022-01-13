@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 15:01:41 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 08:58:15 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_solution	*solve(t_etris *tetri_first)
 {
 	t_solution	*map;
 
-	map = initiate_map(*tetri_first);
+	map = initiate_map(tetri_first);
 	if (!map)
 		return (NULL);
 	while (!find_solution(map, tetri_first))
@@ -27,7 +27,7 @@ t_solution	*solve(t_etris *tetri_first)
 	return (map);
 }
 
-t_solution	*initiate_map(t_etris tetri_first)
+t_solution	*initiate_map(t_etris *tetri_first)
 {
 	int			minos_count;
 	t_solution	*map;
@@ -38,7 +38,7 @@ t_solution	*initiate_map(t_etris tetri_first)
 	map = malloc(sizeof(*map));
 	if (!map)
 		return (NULL);
-	minos_count = count_minos(&tetri_first);
+	minos_count = count_minos(tetri_first);
 	min_board_size = sqrt_up(minos_count * 4);
 	map->height = min_board_size;
 	map->board = strnewarray(min_board_size, min_board_size);
@@ -47,7 +47,7 @@ t_solution	*initiate_map(t_etris tetri_first)
 		ft_memset(map->board[i], '.', min_board_size);
 		++i;
 	}
-	if (!check_if_mino_fit(min_board_size, &tetri_first))
+	if (!check_if_mino_fit(min_board_size, tetri_first))
 		grow_board(map);
 	return (map);
 }
@@ -59,12 +59,47 @@ int	check_if_mino_fit(int min_board_size, t_etris *tetri_first)
 	mino = tetri_first;
 	while (mino)
 	{
+		create_origin_coords(mino);
 		if (mino->height >= min_board_size
 			|| mino->width >= min_board_size)
 			return (FALSE);
 		mino = mino->next;
 	}
 	return (TRUE);
+}
+
+void	create_origin_coords(t_etris *mino)
+{
+	int	num;
+	int	i;
+
+	i = 0;
+	if (mino->coordinates[0] != 0)
+	{
+		num = mino->coordinates[0];
+		while (i < 8)
+		{
+			if (i % 2 == 0)
+				mino->coord_origin[0] = mino->coordinates[0] - num;
+			else
+				mino->coord_origin[0] = mino->coordinates[0];
+			++i;
+		}
+	}
+	else if (mino->coordinates[1] != 0)
+	{
+		num = mino->coordinates[1];
+		while (i < 8)
+		{
+			if (i % 2 != 0)
+				mino->coord_origin[i] = mino->coordinates[i] - num;
+			else
+				mino->coord_origin[i] = mino->coordinates[i];
+			++i;
+		}
+	}
+	else
+		ft_memcpy(mino->coord_origin, mino->coordinates, sizeof(int) * 8);
 }
 
 int	count_minos(t_etris *tetri_first)
@@ -81,8 +116,7 @@ int	count_minos(t_etris *tetri_first)
 	}
 	return (minos_count);
 }
-//TODO replace move_mino with a function that looks for empty square and
-//then checks if the current mino can fit there
+
 int	find_solution(t_solution *map, t_etris *mino)
 {
 	if (!mino)
@@ -114,7 +148,7 @@ void	increment_offsets(t_solution *map, t_etris *mino)
 int	find_place_for_mino(t_solution *map, t_etris *mino)
 {
 	char	*empty;
-	size_t	i;
+	int	i;
 
 	i = mino->y_offset;
 	while (i < map->height)
@@ -149,24 +183,28 @@ int	try_placing_mino(t_solution *map, t_etris *mino)
 
 int	mino_in_bounds(t_solution *map, t_etris *mino)
 {
-	size_t	y_max;
-	size_t	x_max;
+	int	i;
+	int	y;
+	int	x;
 
-	y_max = mino->y_offset + mino->height;
-	x_max = mino->x_offset + mino->width;
-	if (y_max >= map->height || x_max >= map->height)
-		return (FALSE);
-	else
-		return (TRUE);
+	i = 0;
+	while (i < 8)
+	{
+		y = mino->y_offset + mino->coord_origin[i++];
+		x = mino->x_offset + mino->coord_origin[i++];
+		if (y < 0 || x < 0 || y >= map->height || x >= map->height)
+			return (FALSE);
+	}
+	return (TRUE);
 }
 
 void	remove_placement(t_solution *map, t_etris *mino)
 {
 	char	to_remove;
 	char	*ptr;
-	size_t	i;
+	int	i;
 
-	to_remove = mino->c - 1;
+	to_remove = mino->c;
 	i = 0;
 	while (i < map->height)
 	{
@@ -189,8 +227,8 @@ int	is_there_overlap(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < 8)
 	{
-		y = mino->y_offset + mino->coordinates[i++];
-		x = mino->x_offset + mino->coordinates[i++];
+		y = mino->y_offset + mino->coord_origin[i++];
+		x = mino->x_offset + mino->coord_origin[i++];
 		if (check_overlap(map, y, x))
 			return (TRUE);
 	}
@@ -214,16 +252,16 @@ void	place_mino(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < 8)
 	{
-		y = mino->y_offset + mino->coordinates[i++];
-		x = mino->x_offset + mino->coordinates[i++];
+		y = mino->y_offset + mino->coord_origin[i++];
+		x = mino->x_offset + mino->coord_origin[i++];
 		map->board[y][x] = mino->c;
 	}
 }
 
 t_solution	*grow_board(t_solution *map)
 {
-	size_t	new_height;
-	size_t	i;
+	int	new_height;
+	int	i;
 
 	new_height = map->height + 1;
 	i = 0;

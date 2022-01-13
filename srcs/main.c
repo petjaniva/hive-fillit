@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 10:44:13 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 08:10:00 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_minos(t_etris *tetri_first)
 
 void	print_solution(t_solution *map)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < map->height)
