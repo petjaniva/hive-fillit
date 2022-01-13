@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 13:06:24 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 14:38:07 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_etris	*from_file_to_list(char *filename)
 {
 	int		fd;
 	t_etris	*tetri_first;
+
 
 	tetri_first = NULL;
 	fd = open(filename, O_RDONLY);
@@ -53,6 +54,7 @@ int	read_mino(int fd, t_etris **head)
 		}
 		i++;
 	}
+	
 	if (i % 5 != 0 || i > 5 * 26)
 		return (FALSE);
 	add_mino_to_list(head, create_mino(yx));
@@ -103,7 +105,7 @@ int	check_line(char *line)
 	i = 0;
 	if (ft_strlen(line) != 4)
 		return (FALSE);
-	while (line[i])
+	while (i < 4)
 	{
 		if (line[i] != '#' && line[i] != '.')
 			return (FALSE);
