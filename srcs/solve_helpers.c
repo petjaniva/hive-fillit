@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:21:27 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 10:28:10 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 10:31:07 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,7 @@ t_solution	*initiate_map(t_etris *tetri_first)
 		ft_memset(map->board[i], '.', min_board_size);
 		++i;
 	}
-	if (!check_if_mino_fit(min_board_size, tetri_first))
-		grow_board(map);
 	return (map);
-}
-
-int	check_if_mino_fit(int min_board_size, t_etris *tetri_first)
-{
-	t_etris	*mino;
-
-	mino = tetri_first;
-	while (mino)
-	{
-		if (mino->height >= min_board_size
-			|| mino->width >= min_board_size)
-			return (FALSE);
-		mino = mino->next;
-	}
-	return (TRUE);
 }
 
 void	create_origin_coords(t_etris *mino)
