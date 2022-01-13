@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 11:21:52 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 11:27:10 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,28 @@ int	find_solution(t_solution *map, t_etris *mino)
 }
 
 /* Tries to find an empty spot on the board where the mino
-   fits without going out of bounds and overlapping other 
+   fits without going out of bounds or overlapping other 
    minos*/
 
 int	find_place_for_mino(t_solution *map, t_etris *mino)
 {
-	char	*empty;
+	char	*empty_spot;
 	int		row;
 
 	row = mino->y_offset;
 	while (row < map->height)
 	{
 		
-		empty = ft_strchr(&map->board[row][mino->x_offset], '.');
-		while (empty)
+		empty_spot = ft_strchr(&map->board[row][mino->x_offset], '.');
+		while (empty_spot)
 		{
 			mino->y_offset = row;
-			mino->x_offset = empty - map->board[row];
+			mino->x_offset = empty_spot - map->board[row];
 			if (try_placing_mino(map, mino))
 			{
 				return (TRUE);
 			}
-			empty = ft_strchr(empty + 1, '.');
+			empty_spot = ft_strchr(empty_spot + 1, '.');
 		}
 		mino->x_offset = 0;
 		++row;
