@@ -6,12 +6,13 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 15:47:13 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/13 22:32:16 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
+#include "get_next_line.h"
 
 t_etris	*from_file_to_list(char *filename)
 {
@@ -38,7 +39,7 @@ int	read_mino(int fd, t_etris **head)
 	int		i;
 
 	i = 1;
-	while (ft_get_next_line(fd, &line) > 0)
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (i % 5 == 0)
 		{
@@ -53,6 +54,7 @@ int	read_mino(int fd, t_etris **head)
 			ft_strcpy(yx[i % 5 - 1], line);
 		}
 		i++;
+		ft_strdel(&line);
 	}
 	if (i % 5 != 0 || i > 5 * 26)
 		return (FALSE);
