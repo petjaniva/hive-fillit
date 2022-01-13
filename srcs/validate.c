@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 14:02:32 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/13 15:38:52 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	count_hashtag(char yx[4][4])
 		}
 		i++;
 	}
-	//ft_putnbr(count);
 	return (count);
 }
+
 int	check_shape(int coordinates[8])
 {
 	int	i;

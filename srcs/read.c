@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 14:38:07 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/13 15:47:13 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	read_mino(int fd, t_etris **head)
 		}
 		i++;
 	}
-	
 	if (i % 5 != 0 || i > 5 * 26)
 		return (FALSE);
 	add_mino_to_list(head, create_mino(yx));
