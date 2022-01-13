@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 17:31:19 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/13 10:04:50 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,22 @@ int	read_mino(int fd, t_etris **head)
 	i = 1;
 	while (ft_get_next_line(fd, &line) > 0)
 	{
-		if (i % 5 == 0)
+		if (i == 5)
 		{
 			if (ft_strlen(line) != 0)
 				return (FALSE);
 			add_mino_to_list(head, create_mino(yx));
+			i = 0;
 		}
 		else
 		{
 			if (check_line(line) == FALSE)
 				return (FALSE);
-			ft_strcpy(yx[i % 5 - 1], line);
+			ft_strcpy(yx[i - 1], line);
 		}
 		i++;
 	}
-	if (i % 5 != 0)
+	if (i  != 5)
 		return (FALSE);
 	add_mino_to_list(head, create_mino(yx));
 	return (TRUE);
