@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 08:58:15 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 09:59:38 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	create_origin_coords(t_etris *mino)
 		while (i < 8)
 		{
 			if (i % 2 == 0)
-				mino->coord_origin[0] = mino->coordinates[0] - num;
+				mino->coord_origin[i] = mino->coordinates[i] - num;
 			else
-				mino->coord_origin[0] = mino->coordinates[0];
+				mino->coord_origin[i] = mino->coordinates[i];
 			++i;
 		}
 	}
@@ -148,7 +148,7 @@ void	increment_offsets(t_solution *map, t_etris *mino)
 int	find_place_for_mino(t_solution *map, t_etris *mino)
 {
 	char	*empty;
-	int	i;
+	int		i;
 
 	i = mino->y_offset;
 	while (i < map->height)
