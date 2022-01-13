@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:49:00 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/01/13 11:47:25 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 15:40:23 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	is_first_row_empty(char mino[4][4])
 {
 	int	col;
 
+	if (count_hashtag(mino) != 4)
+		return (FALSE);
 	col = 0;
 	while (col < 4)
 	{
@@ -32,6 +34,8 @@ int	is_first_col_empty(char mino[4][4])
 	int	row;
 
 	row = 0;
+	if (count_hashtag(mino) != 4)
+		return (FALSE);
 	while (row < 4)
 	{
 		if (mino[row][0] == '#')
