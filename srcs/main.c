@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 11:44:34 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/13 13:04:31 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ void	print_solution(t_solution *map)
 	}
 }
 
+void	free_memory(t_etris *mino, t_solution *map)
+{
+	t_etris	*tmp;
+
+	while (mino)
+	{
+		tmp = mino->next;
+		free(mino);
+		mino = tmp;
+	}
+	ft_free_ptr_array((void **)map->board, map->height);
+	free(map);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_etris		*tetri_first;
@@ -94,7 +108,6 @@ int	main(int argc, char *argv[])
 		return (3);
 	}
 	print_solution(map);
-	//free_memory(tetri_first, map);*/
-	
+	free_memory(tetri_first, map);
 	return (0);
 }
