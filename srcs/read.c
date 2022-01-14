@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 11:07:43 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 11:53:57 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_etris	*create_mino(char yx[4][4])
 	save_yx_coordinates(mino);
 	mino->x_offset = 0;
 	mino->y_offset = 0;
-	mino->is_first_try = TRUE;
 	find_size(mino);
 	mino->next = NULL;
 	return (mino);
