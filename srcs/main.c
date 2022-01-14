@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 12:54:22 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:25:45 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_solution(t_solution *map)
 	}
 }
 
-void	free_memory(t_etris *mino, t_solution *map, int is_error)
+void	free_memory(t_etris *mino, t_solution *map)
 {
 	t_etris	*tmp;
 
@@ -81,8 +81,13 @@ void	free_memory(t_etris *mino, t_solution *map, int is_error)
 		ft_free_ptr_array((void **)map->board, map->height);
 		free(map);
 	}
-	if (is_error)
-		ft_putendl("error");
+}
+
+void	handle_errors(int error_code, t_etris *tetri, t_solution *map)
+{
+	free_memory(tetri, map);
+	ft_putendl("error");
+	exit(error_code);
 }
 
 int	main(int argc, char *argv[])
@@ -96,18 +101,17 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		ft_putstr("usage: ./fillit file_name");
-		error_code = 1;
+		exit(1);
 	}
 	tetri_first = from_file_to_list(argv[1]);
 	if (!tetri_first && error_code == 0)
-		error_code = 2;
+		handle_errors(error_code, tetri_first, map);
 	if	(!validate_minos(tetri_first) && error_code == 0)
-		error_code = 2;
-	if (error_code == 0)
-		map = solve(tetri_first);
+		handle_errors(error_code, tetri_first, map);
+	map = solve(tetri_first);
 	if (!map && error_code == 0)
-		error_code = 3;
+		handle_errors(error_code, tetri_first, map);
 	print_solution(map);
-	free_memory(tetri_first, map, i);
-	return (i);
+	free_memory(tetri_first, map);
+	return (0);
 }
