@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 20:32:20 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 20:35:08 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ int	read_mino(int fd, t_etris **head)
 		else
 		{
 			if (check_line(*line) == FALSE)
-			{
-				
 				return (false_function(line));
-			}
 			ft_strcpy(yx[i % 5 - 1], *line);
 		}
 		i++;
