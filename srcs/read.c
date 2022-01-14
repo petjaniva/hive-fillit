@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:14:26 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:44:51 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int	read_mino(int fd, t_etris **head)
 	{
 		if (i % 5 == 0)
 		{
-			if (ft_strlen(line) != 0)
+			if (ft_strlen(line) != 0 || !add_mino_to_list(head, create_mino(yx)))
 				return (FALSE);
-			add_mino_to_list(head, create_mino(yx));
 		}
 		else
 		{
@@ -52,16 +51,17 @@ int	read_mino(int fd, t_etris **head)
 		i++;
 		ft_strdel(&line);
 	}
-	if (i % 5 != 0 || i > 5 * 26)
+	if (i % 5 != 0 || i > 5 * 26 || !add_mino_to_list(head, create_mino(yx)))
 		return (FALSE);
-	add_mino_to_list(head, create_mino(yx));
 	return (TRUE);
 }
 
-void	add_mino_to_list(t_etris **head, t_etris *new)
+int	add_mino_to_list(t_etris **head, t_etris *new)
 {
 	t_etris	*tmp;
 
+	if (!new)
+		return (FALSE);
 	if (*head == NULL)
 	{
 		*head = new;
@@ -75,6 +75,7 @@ void	add_mino_to_list(t_etris **head, t_etris *new)
 		tmp->next = new;
 		new->c = tmp->c + 1;
 	}
+	return (TRUE);
 }
 
 t_etris	*create_mino(char yx[4][4])
@@ -82,7 +83,7 @@ t_etris	*create_mino(char yx[4][4])
 	t_etris	*mino;
 
 	mino = malloc(sizeof(*mino));
-	if (!mino)
+	if (!mino || count_hashtag(yx) != 4)
 		return (NULL);
 	ft_memcpy(mino->yx, yx, sizeof(char) * 16);
 	align_mino_topleft(mino->yx);

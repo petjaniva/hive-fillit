@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:35:05 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:47:46 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	mino_in_bounds(t_solution *map, t_etris *mino);
 void	increment_offsets(t_solution *map, t_etris *mino);
 void	create_origin_coords(t_etris *mino);
 int	read_mino(int fd, t_etris **head);
-void	add_mino_to_list(t_etris **head, t_etris *new);
+int	add_mino_to_list(t_etris **head, t_etris *new);
 int	count_hashtag(char yx[4][4]);
 
 #endif

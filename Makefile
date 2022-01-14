@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/14 08:16:06 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/14 09:48:40 by pniva            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = srcs/main.c \
 
 NAME = fillit
 
-CC = gcc
+CC = clang
 
 FLAGS = -g -Wall -Werror -Wextra
 
