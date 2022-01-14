@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/13 10:25:04 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/14 08:16:06 by pniva            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,14 @@ INCLUDES = -I ./includes -I ./libft/includes -L ./libft -lft
 all: $(NAME)
 
 $(NAME):
-		@make -C ./libft/ fclean && make -C ./libft/
 		$(CC) $(FLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
+
+libft:
+		@make -C ./libft/ fclean && make -C ./libft/
+
+test:
+		@cd tests; \
+		bash scripted_test.sh
 
 clean:
 		@rm -f $(OBJS)
