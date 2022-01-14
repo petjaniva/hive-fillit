@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 14:50:24 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 15:21:31 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,17 @@ t_etris	*from_file_to_list(char *filename)
 	if (fd == -1)
 		return (NULL);
 	if (read_mino(fd, &tetri_first) == FALSE)
+	{
+		free_memory(tetri_first, NULL);
 		return (NULL);
+	}
 	return (tetri_first);
+}
+
+int	false_function(char **line)
+{
+	ft_strdel(line);
+	return (FALSE);
 }
 
 int	read_mino(int fd, t_etris **head)
@@ -39,12 +48,12 @@ int	read_mino(int fd, t_etris **head)
 		if (i % 5 == 0)
 		{
 			if (ft_strlen(line) != 0 || !mino_to_list(head, create_mino(yx)))
-				return (FALSE);
+				return (false_function(&line));
 		}
 		else
 		{
 			if (check_line(line) == FALSE)
-				return (FALSE);
+				return (false_function(&line));
 			ft_strcpy(yx[i % 5 - 1], line);
 		}
 		i++;
@@ -87,6 +96,7 @@ t_etris	*create_mino(char yx[4][4])
 	if (count_hashtag(yx) != 4)
 	{
 		free(mino);
+		mino = NULL;
 		return (NULL);
 	}
 	ft_memcpy(mino->yx, yx, sizeof(char) * 16);
