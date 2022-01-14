@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:21:27 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 10:36:14 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 09:36:04 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,21 @@ void	create_origin_coords(t_etris *mino)
 {
 	int	num;
 	int	i;
+	int flag;
 
 	i = 0;
 	if (mino->coordinates[0] != 0)
-	{
-		num = mino->coordinates[0];
-		while (i < 8)
-		{
-			if (i % 2 == 0)
-				mino->coord_origin[i] = mino->coordinates[i] - num;
-			else
-				mino->coord_origin[i] = mino->coordinates[i];
-			++i;
-		}
-	}
+		flag = 0;
 	else
+		flag = 1;
+	num = mino->coordinates[flag];
+	while (i < 8)
 	{
-		num = mino->coordinates[1];
-		while (i < 8)
-		{
-			if (i % 2 != 0)
-				mino->coord_origin[i] = mino->coordinates[i] - num;
-			else
-				mino->coord_origin[i] = mino->coordinates[i];
-			++i;
-		}
+		if (i % 2 == flag)
+			mino->coord_origin[i] = mino->coordinates[i] - num;
+		else
+			mino->coord_origin[i] = mino->coordinates[i];
+		++i;
 	}
 }
 
