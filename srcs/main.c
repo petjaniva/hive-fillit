@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 13:32:10 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:57:36 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int argc, char *argv[])
 	tetri_first = from_file_to_list(argv[1]);
 	if (!tetri_first)
 		handle_errors(2, tetri_first, map);
-	if	(!validate_minos(tetri_first))
+	if (!validate_minos(tetri_first))
 		handle_errors(3, tetri_first, map);
 	map = solve(tetri_first);
 	if (!map)
