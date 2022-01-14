@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:21:26 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:36:44 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	tetri_first = from_file_to_list(argv[1]);
-	print_minos(tetri_first);
+	//print_minos(tetri_first);
 	if (!tetri_first)
 	{
 		ft_putendl("error");
