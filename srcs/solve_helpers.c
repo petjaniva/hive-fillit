@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:21:27 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 11:10:52 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:44:09 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,24 @@ t_solution	*initiate_map(t_etris *tetri_first)
 	return (map);
 }
 
-void	create_origin_coords(t_etris *mino)
+void	move_to_origin(t_etris *mino)
 {
 	int	num;
 	int	i;
-	int	flag;
+	int	y_or_x;
 
 	i = 0;
 	if (mino->coordinates[0] != 0)
-		flag = 0;
+		y_or_x = 0;
 	else
-		flag = 1;
-	num = mino->coordinates[flag];
+		y_or_x = 1;
+	num = mino->coordinates[y_or_x];
 	while (i < 8)
 	{
-		if (i % 2 == flag)
-			mino->coord_origin[i] = mino->coordinates[i] - num;
+		if (i % 2 == y_or_x)
+			mino->coordinates[i] = mino->coordinates[i] - num;
 		else
-			mino->coord_origin[i] = mino->coordinates[i];
+			mino->coordinates[i] = mino->coordinates[i];
 		++i;
 	}
 }
