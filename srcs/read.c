@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 11:53:57 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 14:50:24 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ t_etris	*create_mino(char yx[4][4])
 	t_etris	*mino;
 
 	mino = malloc(sizeof(*mino));
-	if (!mino || count_hashtag(yx) != 4)
+	if (!mino)
 		return (NULL);
+	if (count_hashtag(yx) != 4)
+	{
+		free(mino);
+		return (NULL);
+	}
 	ft_memcpy(mino->yx, yx, sizeof(char) * 16);
 	align_mino_topleft(mino->yx);
 	save_yx_coordinates(mino);
