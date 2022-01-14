@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/12 22:17:51 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:35:03 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	save_yx_coordinates(t_etris *mino)
 	int	col;
 	int	i;
 
-	ft_bzero(mino->coordinates, 8);
+	ft_bzero(mino->coordinates, 8 * sizeof(int));
 	row = 0;
 	i = 0;
 	while (row < 4)
