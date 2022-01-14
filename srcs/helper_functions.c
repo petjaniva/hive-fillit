@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:35:03 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 14:28:03 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ void	save_yx_coordinates(t_etris *mino)
 			col++;
 		}
 		row++;
+	}
+	move_to_origin(mino);
+}
+
+void	move_to_origin(t_etris *mino)
+{
+	int	num;
+	int	i;
+	int	y_or_x;
+
+	i = 0;
+	if (mino->coordinates[0] != 0)
+		y_or_x = 0;
+	else
+		y_or_x = 1;
+	num = mino->coordinates[y_or_x];
+	while (i < 8)
+	{
+		if (i % 2 == y_or_x)
+			mino->coordinates[i] = mino->coordinates[i] - num;
+		else
+			mino->coordinates[i] = mino->coordinates[i];
+		++i;
 	}
 }
 

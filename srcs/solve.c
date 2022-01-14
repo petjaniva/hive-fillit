@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 13:44:21 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:12:03 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	find_solution(t_solution *map, t_etris *mino)
 {
 	if (!mino)
 		return (TRUE);
-	move_to_origin(mino);
 	while (find_place_for_mino(map, mino))
 	{
 		place_mino(map, mino);
