@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:13:03 by pniva             #+#    #+#              #
-#    Updated: 2022/01/14 09:48:40 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/14 13:55:58 by pniva            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = srcs/main.c \
 		srcs/validate.c \
 		srcs/solve.c \
 		srcs/align.c \
-		srcs/solve_helpers.c
+		srcs/solve_helpers.c \
+		srcs/find_place_for_mino.c
 
 NAME = fillit
 
