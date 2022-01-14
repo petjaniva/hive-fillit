@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 11:07:19 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:48:30 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_tetris
 	char			c;
 	char			yx[4][4];
 	int				coordinates[8];
-	int				coord_origin[8];
 	int			x_offset;
 	int			y_offset;
 	int				height;
@@ -112,7 +111,7 @@ int	find_place_for_mino(t_solution *map, t_etris *mino);
 int	try_placing_mino(t_solution *map, t_etris *mino);
 int	mino_in_bounds(t_solution *map, t_etris *mino);
 void	increment_offsets(t_solution *map, t_etris *mino);
-void	create_origin_coords(t_etris *mino);
+void	move_to_origin(t_etris *mino);
 int	read_mino(int fd, t_etris **head);
 int	mino_to_list(t_etris **head, t_etris *new);
 int	count_hashtag(char yx[4][4]);

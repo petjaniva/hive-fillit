@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 13:25:35 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/01/14 13:28:16 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:34:26 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	mino_in_bounds(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < 8)
 	{
-		y = mino->y_offset + mino->coord_origin[i++];
-		x = mino->x_offset + mino->coord_origin[i++];
+		y = mino->y_offset + mino->coordinates[i++];
+		x = mino->x_offset + mino->coordinates[i++];
 		if (y < 0 || x < 0 || y >= map->height || x >= map->height)
 			return (FALSE);
 	}
@@ -84,8 +84,8 @@ int	is_there_overlap(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < 8)
 	{
-		y = mino->y_offset + mino->coord_origin[i++];
-		x = mino->x_offset + mino->coord_origin[i++];
+		y = mino->y_offset + mino->coordinates[i++];
+		x = mino->x_offset + mino->coordinates[i++];
 		if (check_overlap(map, y, x))
 			return (TRUE);
 	}

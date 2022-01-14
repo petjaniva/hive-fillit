@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 13:28:53 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:44:21 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	find_solution(t_solution *map, t_etris *mino)
 {
 	if (!mino)
 		return (TRUE);
-	create_origin_coords(mino);
+	move_to_origin(mino);
 	while (find_place_for_mino(map, mino))
 	{
 		place_mino(map, mino);
@@ -54,8 +54,8 @@ void	place_mino(t_solution *map, t_etris *mino)
 	i = 0;
 	while (i < 8)
 	{
-		y = mino->y_offset + mino->coord_origin[i++];
-		x = mino->x_offset + mino->coord_origin[i++];
+		y = mino->y_offset + mino->coordinates[i++];
+		x = mino->x_offset + mino->coordinates[i++];
 		map->board[y][x] = mino->c;
 	}
 }
