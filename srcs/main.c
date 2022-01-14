@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 13:25:45 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:32:10 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ int	main(int argc, char *argv[])
 {
 	t_etris		*tetri_first;
 	t_solution	*map;
-	int			error_code;
 
-	error_code = 0;
 	map = NULL;
 	if (argc != 2)
 	{
@@ -104,13 +102,13 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	tetri_first = from_file_to_list(argv[1]);
-	if (!tetri_first && error_code == 0)
-		handle_errors(error_code, tetri_first, map);
-	if	(!validate_minos(tetri_first) && error_code == 0)
-		handle_errors(error_code, tetri_first, map);
+	if (!tetri_first)
+		handle_errors(2, tetri_first, map);
+	if	(!validate_minos(tetri_first))
+		handle_errors(3, tetri_first, map);
 	map = solve(tetri_first);
-	if (!map && error_code == 0)
-		handle_errors(error_code, tetri_first, map);
+	if (!map)
+		handle_errors(4, tetri_first, map);
 	print_solution(map);
 	free_memory(tetri_first, map);
 	return (0);
