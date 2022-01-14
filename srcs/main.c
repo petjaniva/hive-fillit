@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:36:44 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 11:45:47 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ void	free_memory(t_etris *mino, t_solution *map)
 		free(mino);
 		mino = tmp;
 	}
-	ft_free_ptr_array((void **)map->board, map->height);
-	free(map);
+	if (map)
+	{
+		ft_free_ptr_array((void **)map->board, map->height);
+		free(map);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -85,27 +88,21 @@ int	main(int argc, char *argv[])
 	
 	if (argc != 2)
 	{
-		ft_putstr("usage: ");
-		ft_putstr(argv[0]);
-		ft_putendl(" file_name");
+		ft_putstr("usage: ./fillit file_name");
 		return (1);
 	}
 	tetri_first = from_file_to_list(argv[1]);
-	//print_minos(tetri_first);
-	if (!tetri_first)
+	if (!tetri_first || !validate_minos(tetri_first))
 	{
 		ft_putendl("error");
-		return (1);
-	}
-	if (!validate_minos(tetri_first))
-	{
-			ft_putendl("error");
-			return (2);
+		free_memory(tetri_first, NULL);
+		return (2);
 	}
 	map = solve(tetri_first);
 	if (!map)
 	{
 		ft_putendl("error");
+		free_memory(tetri_first, map);
 		return (3);
 	}
 	print_solution(map);
