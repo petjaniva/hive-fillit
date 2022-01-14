@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:05:08 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:14:26 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_etris	*create_mino(char yx[4][4])
 	mino = malloc(sizeof(*mino));
 	if (!mino)
 		return (NULL);
-	ft_memcpy(mino->yx, yx, sizeof(int) * 16);
+	ft_memcpy(mino->yx, yx, sizeof(char) * 16);
 	align_mino_topleft(mino->yx);
 	save_yx_coordinates(mino);
 	mino->x_offset = 0;
