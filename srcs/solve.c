@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 11:27:10 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 11:09:45 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	find_solution(t_solution *map, t_etris *mino)
 	{
 		place_mino(map, mino);
 		if (find_solution(map, mino->next))
-				return (TRUE);
+			return (TRUE);
 		remove_placement(map, mino);
 		increment_offsets(map, mino);
 	}
@@ -57,7 +57,6 @@ int	find_place_for_mino(t_solution *map, t_etris *mino)
 	row = mino->y_offset;
 	while (row < map->height)
 	{
-		
 		empty_spot = ft_strchr(&map->board[row][mino->x_offset], '.');
 		while (empty_spot)
 		{
@@ -86,8 +85,10 @@ int	try_placing_mino(t_solution *map, t_etris *mino)
 	}
 	return (FALSE);
 }
+
 /* Retuns TRUE if none of minos 4 spots go over the squares
    dimensions */
+
 int	mino_in_bounds(t_solution *map, t_etris *mino)
 {
 	int	i;
@@ -109,7 +110,7 @@ void	remove_placement(t_solution *map, t_etris *mino)
 {
 	char	to_remove;
 	char	*ptr;
-	int	i;
+	int		i;
 
 	to_remove = mino->c;
 	i = 0;

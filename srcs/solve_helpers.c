@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:21:27 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 09:36:04 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 11:10:52 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	create_origin_coords(t_etris *mino)
 {
 	int	num;
 	int	i;
-	int flag;
+	int	flag;
 
 	i = 0;
 	if (mino->coordinates[0] != 0)
@@ -58,7 +58,6 @@ void	create_origin_coords(t_etris *mino)
 	}
 }
 
-
 int	count_minos(t_etris *tetri_first)
 {
 	int		minos_count;
@@ -74,7 +73,6 @@ int	count_minos(t_etris *tetri_first)
 	return (minos_count);
 }
 
-
 void	increment_offsets(t_solution *map, t_etris *mino)
 {
 	if (mino->x_offset >= map->height)
@@ -85,7 +83,6 @@ void	increment_offsets(t_solution *map, t_etris *mino)
 	else
 		mino->x_offset++;
 }
-
 
 t_solution	*grow_board(t_solution *map)
 {
