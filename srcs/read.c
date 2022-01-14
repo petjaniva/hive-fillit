@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 09:25:41 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/14 10:05:08 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ t_etris	*from_file_to_list(char *filename)
 	tetri_first = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putendl("unable to read file");
 		return (NULL);
-	}
 	if (read_mino(fd, &tetri_first) == FALSE)
 		return (NULL);
 	return (tetri_first);

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/13 15:38:52 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:06:11 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_shape(int coordinates[8])
 	i = 0;
 	while (i < 19)
 	{
-		if (!ft_memcmp(coordinates, TETRIMINOS[i], 8))
+		if (!ft_memcmp(coordinates, TETRIMINOS[i], 8 * sizeof(int)))
 			return (TRUE);
 		++i;
 	}
