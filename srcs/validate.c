@@ -6,12 +6,13 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:06:11 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:24:05 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+#include <stdio.h>
 
 int	validate_minos(t_etris *tetri_first)
 {
@@ -22,6 +23,7 @@ int	validate_minos(t_etris *tetri_first)
 	{
 		if (count_hashtag(mino->yx) != 4)
 			return (FALSE);
+		printf("check_shape: %d\n", check_shape(mino->coordinates));
 		if (!check_shape(mino->coordinates))
 			return (FALSE);
 		mino = mino->next;
