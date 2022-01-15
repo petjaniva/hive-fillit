@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 20:35:08 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 08:34:42 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,38 @@ int	false_function(char **line)
 
 int	read_mino(int fd, t_etris **head)
 {
-	char	**line;
+	char	*line;
 	char	yx[4][4];
 	int		i;
 
-	line = NULL;
 	i = 1;
-	while (ft_get_next_line(fd, line) > 0)
+	while (ft_get_next_line(fd, &line) > 0)
 	{
 		if (i % 5 == 0)
 		{
-			if (ft_strlen(*line) != 0 || !mino_to_list(head, create_mino(yx)))
-				return (false_function(line));
+			if (ft_strlen(line) != 0 || !mino_to_list(head, create_mino(yx)))
+			{
+				free(line);
+				return (FALSE);
+			}
 		}
 		else
 		{
-			if (check_line(*line) == FALSE)
-				return (false_function(line));
-			ft_strcpy(yx[i % 5 - 1], *line);
+			if (check_line(line) == FALSE)
+			{
+				free(line);
+				return (FALSE);
+			}
+			ft_strcpy(yx[i % 5 - 1], line);
 		}
 		i++;
-		ft_strdel(line);
+		free(line);
 	}
 	if (i % 5 != 0 || i > 5 * 26 || !mino_to_list(head, create_mino(yx)))
-		return (false_function(line));
+	{
+		free(line);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
