@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 09:41:38 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 14:12:03 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/15 12:33:17 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	place_mino(t_solution *map, t_etris *mino)
 	{
 		y = mino->y_offset + mino->coordinates[i++];
 		x = mino->x_offset + mino->coordinates[i++];
-		map->board[y][x] = mino->c;
+		map->board[y][x] = mino->letter;
 	}
 }
 
@@ -65,7 +65,7 @@ void	remove_placement(t_solution *map, t_etris *mino)
 	char	*ptr;
 	int		i;
 
-	to_remove = mino->c;
+	to_remove = mino->letter;
 	i = 0;
 	while (i < map->height)
 	{

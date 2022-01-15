@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 12:26:58 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 12:32:26 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	mino_to_list(t_etris **head, t_etris *new)
 	if (*head == NULL)
 	{
 		*head = new;
-		(*head)->c = 'A';
+		(*head)->letter = 'A';
 	}
 	else
 	{
@@ -75,7 +75,7 @@ int	mino_to_list(t_etris **head, t_etris *new)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
-		new->c = tmp->c + 1;
+		new->letter = tmp->letter + 1;
 	}
 	return (TRUE);
 }
