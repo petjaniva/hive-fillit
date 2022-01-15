@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 10:36:32 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:14:44 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,38 @@ int	count_hashtag(char yx[4][4])
 		while (j < 4)
 		{
 			if (yx[i][j] == '#')
-				count++;
+				count++:
 			j++;
 		}
 		i++;
 	}
 	return (count);
 }
+
+int	count_connections(char yx[4][4])
+{
+	int	i;
+	int	j;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (yx[i][j] == '#')
+			{
+				
+			}
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
+
 
 int	check_shape(int coordinates[8])
 {
