@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 11:03:00 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 11:12:33 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,7 @@ int			mino_to_list(t_etris **head, t_etris *new);
 int			count_hashtag(char yx[4][4]);
 int			count_connections(char yx[4][4]);
 void		free_memory(t_etris *mino, t_solution *map);
+int			free_line_return_false(char **line);
+
 
 #endif
