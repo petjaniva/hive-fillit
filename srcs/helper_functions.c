@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 10:40:14 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/15 12:27:15 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,6 @@ void	move_to_origin(t_etris *mino)
 		else
 			mino->coordinates[i] = mino->coordinates[i];
 		++i;
-	}
-}
-
-void	find_size(t_etris *mino)
-{
-	int	i;
-
-	mino->height = mino->coordinates[0];
-	mino->width = mino->coordinates[1];
-	i = 2;
-	while (i < 8)
-	{
-		if (mino->coordinates[i] > mino->height)
-			mino->height = mino->coordinates[i];
-		if (mino->coordinates[i + 1] > mino->width)
-			mino->width = mino->coordinates[i + 1];
-		i = i + 2;
 	}
 }
 

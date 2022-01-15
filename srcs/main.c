@@ -6,14 +6,14 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:25:16 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 14:54:10 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 12:24:02 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-void	print_minos(t_etris *tetri_first)
+/*void	print_minos(t_etris *tetri_first)
 {
 	t_etris *mino;
 	int		i;
@@ -51,7 +51,7 @@ void	print_minos(t_etris *tetri_first)
 	}
 	ft_putchar('\n');
 }
-
+*/
 void	print_solution(t_solution *map)
 {
 	int	i;
