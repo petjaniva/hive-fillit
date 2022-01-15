@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 14:29:43 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 15:22:07 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 10:36:26 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ int			read_mino(int fd, t_etris **head);
 int			mino_to_list(t_etris **head, t_etris *new);
 int			count_hashtag(char yx[4][4]);
 void		free_memory(t_etris *mino, t_solution *map);
+int			free_line_return_false(char **line);
+
 
 #endif

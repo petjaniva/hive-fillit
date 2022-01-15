@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 08:34:42 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 10:41:52 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ t_etris	*from_file_to_list(char *filename)
 	return (tetri_first);
 }
 
-int	false_function(char **line)
-{
-	ft_strdel(line);
-	return (FALSE);
-}
-
 int	read_mino(int fd, t_etris **head)
 {
 	char	*line;
@@ -48,28 +42,19 @@ int	read_mino(int fd, t_etris **head)
 		if (i % 5 == 0)
 		{
 			if (ft_strlen(line) != 0 || !mino_to_list(head, create_mino(yx)))
-			{
-				free(line);
-				return (FALSE);
-			}
+				return (free_line_return_false(&line));
 		}
 		else
 		{
 			if (check_line(line) == FALSE)
-			{
-				free(line);
-				return (FALSE);
-			}
+				return (free_line_return_false(&line));
 			ft_strcpy(yx[i % 5 - 1], line);
 		}
 		i++;
-		free(line);
+		ft_strdel(&line);
 	}
 	if (i % 5 != 0 || i > 5 * 26 || !mino_to_list(head, create_mino(yx)))
-	{
-		free(line);
-		return (FALSE);
-	}
+		return (free_line_return_false(&line));
 	return (TRUE);
 }
 

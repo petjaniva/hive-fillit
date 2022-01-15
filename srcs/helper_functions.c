@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 10:52:11 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/14 14:28:03 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:40:14 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,10 @@ char	**strnewarray(int pointers, int chars)
 		++i;
 	}
 	return (array);
+}
+
+int	free_line_return_false(char **line)
+{
+	ft_strdel(line);
+	return (FALSE);
 }
