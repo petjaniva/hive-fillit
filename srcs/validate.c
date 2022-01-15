@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:56:46 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 10:28:16 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/15 10:58:41 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 int	validate_minos(t_etris *tetri_first)
 {
 	t_etris	*mino;
+	int		connections;
 
 	mino = tetri_first;
 	while (mino)
 	{
 		if (count_hashtag(mino->yx) != 4)
 			return (FALSE);
-		if (!check_shape(mino->coordinates))
+		connections = count_connections(mino->yx);
+		if (connections != 6 && connections != 8)
 			return (FALSE);
 		mino = mino->next;
 	}
@@ -43,7 +45,7 @@ int	count_hashtag(char yx[4][4])
 		while (j < 4)
 		{
 			if (yx[i][j] == '#')
-				count++:
+				count++;
 			j++;
 		}
 		i++;
@@ -58,38 +60,24 @@ int	count_connections(char yx[4][4])
 	int	count;
 
 	count = 0;
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (i++ < 3)
 	{
-		j = 0;
-		while (j < 4)
+		j = -1;
+		while (j++ < 3)
 		{
 			if (yx[i][j] == '#')
 			{
-				if (i - 1 > 0)
-					if (yx[i -1][j] == '#')
-						count++;
-				if (i + 1 < 4)
-					if (yx[i + 1][j] == '#')
+				if (i - 1 >= 0 && yx[i - 1][j] == '#')
+					count++;
+				if (i + 1 < 4 && yx[i + 1][j] == '#')
+					count++;
+				if (j - 1 >= 0 && yx[i][j - 1] == '#')
+					count++;
+				if (j + 1 < 4 && yx[i][j + 1] == '#')
+					count++;
 			}
-			j++;
 		}
-		i++;
 	}
 	return (count);
-}
-
-
-int	check_shape(int coordinates[8])
-{
-	int	i;
-
-	i = 0;
-	while (i < 19)
-	{
-		if (!ft_memcmp(coordinates, TETRIMINOS[i], 8 * sizeof(int)))
-			return (TRUE);
-		++i;
-	}
-	return (FALSE);
 }
