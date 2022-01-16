@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:54:14 by pniva             #+#    #+#             */
-/*   Updated: 2022/01/15 12:32:26 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/16 08:00:22 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ t_etris	*from_file_to_list(char *filename)
 		return (NULL);
 	if (read_mino(fd, &tetri_first) == FALSE)
 	{
+		close(fd);
 		free_memory(tetri_first, NULL);
 		return (NULL);
 	}
+	close(fd);
 	return (tetri_first);
 }
 
